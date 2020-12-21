@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="Computer_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="Computer_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="315fs"></ZoomEndTime>
+      <Cursor1Time time="1000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="187"></NameColumnWidth>
+      <ValueColumnWidth column_width="71"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="37" />
+   <wvobject type="logic" fp_name="/Computer_tb/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/rst">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/y">
+      <obj_property name="ElementShortName">y</obj_property>
+      <obj_property name="ObjectShortName">y</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/Computer_tb/clk_period">
+      <obj_property name="ElementShortName">clk_period</obj_property>
+      <obj_property name="ObjectShortName">clk_period</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/dataBus">
+      <obj_property name="ElementShortName">dataBus[7:0]</obj_property>
+      <obj_property name="ObjectShortName">dataBus[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/addrBus">
+      <obj_property name="ElementShortName">addrBus[7:0]</obj_property>
+      <obj_property name="ObjectShortName">addrBus[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/UUT/romEnable">
+      <obj_property name="ElementShortName">romEnable</obj_property>
+      <obj_property name="ObjectShortName">romEnable</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/UUT/mem_en">
+      <obj_property name="ElementShortName">mem_en</obj_property>
+      <obj_property name="ObjectShortName">mem_en</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/Computer_tb/UUT/processor/cu/state_reg">
+      <obj_property name="ElementShortName">state_reg</obj_property>
+      <obj_property name="ObjectShortName">state_reg</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/processor/registers/reg_mem/q">
+      <obj_property name="ElementShortName">q[7:0]</obj_property>
+      <obj_property name="ObjectShortName">q[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/UUT/processor/registers/reg_mem/load">
+      <obj_property name="ElementShortName">load</obj_property>
+      <obj_property name="ObjectShortName">load</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/processor/registers/reg_load">
+      <obj_property name="ElementShortName">reg_load[2:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_load[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/processor/registers/reg_mem/q">
+      <obj_property name="ElementShortName">q[7:0]</obj_property>
+      <obj_property name="ObjectShortName">q[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/processor/pc/r_reg">
+      <obj_property name="ElementShortName">r_reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">r_reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/processor/pc/dataBus">
+      <obj_property name="ElementShortName">dataBus[7:0]</obj_property>
+      <obj_property name="ObjectShortName">dataBus[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/processor/reg_load">
+      <obj_property name="ElementShortName">reg_load[2:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_load[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/processor/registers/reg_load">
+      <obj_property name="ElementShortName">reg_load[2:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_load[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/UUT/processor/registers/load_mem">
+      <obj_property name="ElementShortName">load_mem</obj_property>
+      <obj_property name="ObjectShortName">load_mem</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/processor/registers/reg_mem/reg">
+      <obj_property name="ElementShortName">reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/UUT/processor/registers/reg_mem/en">
+      <obj_property name="ElementShortName">en</obj_property>
+      <obj_property name="ObjectShortName">en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/readOnlyMem/dataOut">
+      <obj_property name="ElementShortName">dataOut[7:0]</obj_property>
+      <obj_property name="ObjectShortName">dataOut[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/readOnlyMem/dataOut">
+      <obj_property name="ElementShortName">dataOut[7:0]</obj_property>
+      <obj_property name="ObjectShortName">dataOut[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/readOnlyMem/addr">
+      <obj_property name="ElementShortName">addr[6:0]</obj_property>
+      <obj_property name="ObjectShortName">addr[6:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/UUT/readOnlyMem/en">
+      <obj_property name="ElementShortName">en</obj_property>
+      <obj_property name="ObjectShortName">en</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/UUT/romEnable">
+      <obj_property name="ElementShortName">romEnable</obj_property>
+      <obj_property name="ObjectShortName">romEnable</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/UUT/ramEnable">
+      <obj_property name="ElementShortName">ramEnable</obj_property>
+      <obj_property name="ObjectShortName">ramEnable</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/UUT/mem_en">
+      <obj_property name="ElementShortName">mem_en</obj_property>
+      <obj_property name="ObjectShortName">mem_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/addrBus">
+      <obj_property name="ElementShortName">addrBus[7:0]</obj_property>
+      <obj_property name="ObjectShortName">addrBus[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/UUT/processor/mem_en">
+      <obj_property name="ElementShortName">mem_en</obj_property>
+      <obj_property name="ObjectShortName">mem_en</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/UUT/processor/cu/mem_out">
+      <obj_property name="ElementShortName">mem_out</obj_property>
+      <obj_property name="ObjectShortName">mem_out</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/UUT/processor/cu/pc_out">
+      <obj_property name="ElementShortName">pc_out</obj_property>
+      <obj_property name="ObjectShortName">pc_out</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/UUT/processor/registers/reg_mem/en">
+      <obj_property name="ElementShortName">en</obj_property>
+      <obj_property name="ObjectShortName">en</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/UUT/processor/registers/load_mem">
+      <obj_property name="ElementShortName">load_mem</obj_property>
+      <obj_property name="ObjectShortName">load_mem</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/UUT/processor/registers/reg_mem/load">
+      <obj_property name="ElementShortName">load</obj_property>
+      <obj_property name="ObjectShortName">load</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/processor/registers/reg_mem/reg">
+      <obj_property name="ElementShortName">reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">reg[7:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/readOnlyMem/dataOut">
+      <obj_property name="ElementShortName">dataOut[7:0]</obj_property>
+      <obj_property name="ObjectShortName">dataOut[7:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/UUT/readOnlyMem/en">
+      <obj_property name="ElementShortName">en</obj_property>
+      <obj_property name="ObjectShortName">en</obj_property>
+   </wvobject>
+</wave_config>
