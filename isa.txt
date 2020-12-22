@@ -4,14 +4,14 @@ ldi 2 reg constant
 stw 3 reg addr
 sti 4 reg constant
 
-add 5 regDest 00 reg reg
+add 5 regDest 
 addi 6 reg constant
-sub 7 regSource 00 reg reg
+sub 7 regDest
 subi 8 reg constant
 jmp 9 000 address
 ret 10 no params
-beq 11 reg reg address 
-bne 12 reg reg address 
+beq 11 address 
+bne 12 address 
 mov reg reg
 psh reg
 pul reg

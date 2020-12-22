@@ -1,7 +1,0 @@
-# compile vhdl design source files
-vhdl xil_defaultlib  \
-"../../../../Computer8Bit.srcs/sources_1/new/PIPORegister.vhd" \
-"../../../../Computer8Bit.srcs/sim_1/new/Register_tb.vhd" \
-
-# Do not sort compile order
-nosort
