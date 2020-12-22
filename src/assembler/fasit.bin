@@ -1,0 +1,33 @@
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00001011 ; ldw xr
+00011110; addresse 30 
+00001100 ; ldw yr
+00011111 ; addresse 31 
+00101011 ; add, legg res i xr
+00000000 ; empty arg
+00011011 ; store word xr 
+11110000 ; addresse 240 
+00010011 ; ldi xr
+11111111 ; const verdi FF
+00010100 ; ldi yr
+01100011 ; verdien 99 i decimal
+00000000 ; nop
+00000000 ; nop forts
+01101011 ; mov xr
+00000100 ; yr
+01001000 ; jmp
+00010100 ; til addresse 20
+
+
+
+
+
+
+00000101 ; value 5
+00001111 ; value 15
+01001100 ; value of L
