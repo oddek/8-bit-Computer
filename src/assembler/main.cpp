@@ -1,3 +1,4 @@
+#include <iomanip>
 #include <map>
 #include <string>
 #include <sstream>
@@ -21,6 +22,8 @@ const std::vector<std::string> OPCODES
 		"ret",
 		"beq",
 		"bne",
+		"bgt",
+		"bge",
 		"mov",
 		"psh",
 		"pul",
@@ -34,7 +37,9 @@ const std::vector<std::string> OPCODES
 		"mul",
 		"div",
 		"inl",
-		"ini"
+		"ini",
+		"mfhi",
+		"mflo"
 };
 
 //Opcodes which does not have a register argument, but does have address argument
@@ -43,6 +48,8 @@ const std::vector<std::string> NOREGOPCODES
 	"jmp",
 		"beq",
 		"bne",
+		"bgt",
+		"bge",
 		"inl",
 		"ini"
 };
@@ -172,7 +179,18 @@ void printVec(TokenTable v)
 			std::cout << token.word << "(" << getEnumText(token.type) << ") ";
 		}
 
-		std::cout << "| label: " << getLabelFromLine(lineNum) << "\n";
+		std::string label = getLabelFromLine(lineNum);
+		if(label != "none")
+		{
+			/* label = "| label: " + label + "\n"; */
+			/* printf("%*s", 30, label.c_str()); */
+
+			std::cout << std::right << std::setw(30) << "| label: " << label << "\n";
+		}
+		else
+		{
+			std::cout << std::endl;
+		}
 		lineNum++;
 	}
 }
