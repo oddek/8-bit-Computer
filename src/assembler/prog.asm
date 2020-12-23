@@ -1,13 +1,13 @@
-	.org #$0006 ; place all this code at address 0006
+	.org #$0002 ; place all this code at address 0006
 	ldw xr intx ; load address 001E into register X
 	ldw yr inty ; load address 001F into register Y
 	add xr ; add x and y reg and put in x
 	stw xr #$F0 ; 
-	ldi xr #FF ; place value FF into X reg
-	ldi yr 99 ; place 99 in decimal into y reg
+	; ldi xr #FF ; place value FF into X reg
+	; ldi yr 99 ; place 99 in decimal into y reg
 loop:
 	nop
-	mov xr yr		
+	; mov xr yr		
 	jmp loop
 
 

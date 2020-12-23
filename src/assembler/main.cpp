@@ -13,28 +13,38 @@ const std::vector<std::string> OPCODES
 		"ldw",
 		"ldi",
 		"stw",
-		"sti",
 		"add",
-		"addi",
+		"addu",
 		"sub",
-		"subi",
+		"subu",
 		"jmp",
-		"reg",
+		"ret",
 		"beq",
 		"bne",
 		"mov",
 		"psh",
 		"pul",
 		"and",
-		"xor",
 		"or",
-		"not"
+		"not",
+		"xor",
+		"xnor",
+		"sll",
+		"srl",
+		"mul",
+		"div",
+		"inl",
+		"ini"
 };
 
-//Opcodes which does not have a register argument
+//Opcodes which does not have a register argument, but does have address argument
 const std::vector<std::string> NOREGOPCODES
 {
-	"jmp"
+	"jmp",
+		"beq",
+		"bne",
+		"inl",
+		"ini"
 };
 
 
@@ -46,9 +56,7 @@ const std::vector<std::string> REGISTERS
 		"xr",
 		"yr",
 		"sr",
-		"mr",
-		"pc",
-		"sp"
+		"mr"
 };
 
 //Labels need to be mapped to an address
@@ -561,6 +569,14 @@ std::vector<std::bitset<8>> createBinaryVector(TokenTable tt)
 void writeToFile(std::vector<std::bitset<8>> binary, std::string fileName)
 {
 
+	std::ofstream file(fileName);
+	if(file.is_open())
+	{
+		for(auto& b : binary)
+		{
+			file << b.to_string() << "\n";
+		}
+	}
 }
 
 void printLabelMap()
@@ -607,6 +623,7 @@ int main(int argc, char* argv[])
 	printVec(binary);
 
 	printLabelMap();
+	writeToFile(binary, "../prog.bin");
 
 
 	return 0;

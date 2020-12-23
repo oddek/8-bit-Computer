@@ -11,7 +11,7 @@ LDFLAGS =
 all: build run 
 
 run:
-	./$(PROG) "prog.asm" "128"
+	./$(PROG) "fullTest.asm" "128"
 
 build: $(PROG)
 
