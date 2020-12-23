@@ -54,7 +54,7 @@ architecture Behavioral of ROM is
         return result;
     end function;
     
-    signal memory : memory_type := getFile("../../../../input.bin");
+    signal memory : memory_type := getFile("../../../../prog.bin");
 
 begin
     dataOut <= memory(to_integer(unsigned(addr))) when en = '1' else

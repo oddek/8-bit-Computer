@@ -21,6 +21,7 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 --Opcodes
@@ -41,7 +42,7 @@ end ALU;
 architecture Behavioral of ALU is
 
 begin
-    Z <= std_logic_vector(signed(x) + signed(y)) when opcode = "001" else
+    Z <= x + y when opcode = "001" else--std_logic_vector(signed(x) + signed(y)) when opcode = "001" else
          std_logic_vector(signed(x) - signed(y)) when opcode = "010" else
          (others => 'Z');
 

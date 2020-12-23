@@ -58,15 +58,32 @@ architecture Behavioral of ControlUnit is
     constant ldw : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#01#, 5));
     constant ldi : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#02#, 5));
     constant stw : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#03#, 5));
-    constant sti : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#04#, 5));
     constant add : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#05#, 5));
-    constant addi : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#06#, 5));
+    constant addu : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#06#, 5));
     constant sub : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#07#, 5));
-    constant subi : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#08#, 5));
+    constant subu : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#08#, 5));
     constant jmp : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#09#, 5));
     constant ret : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0A#, 5));
     constant beq : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0B#, 5));
     constant bne : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0C#, 5));
+    constant bgt : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0C#, 5));
+    constant bge : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0C#, 5));
+    constant mov : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0D#, 5));
+    constant psh : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0E#, 5));
+    constant pul : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0F#, 5));
+    constant and : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#10#, 5));
+    constant or : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#11#, 5));
+    constant not : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#12#, 5));
+    constant xor : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#13#, 5));
+    constant xnor : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#14#, 5));
+    constant sll : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#15#, 5));
+    constant srl : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#16#, 5));
+    constant mul : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#17#, 5));
+    constant div : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#18#, 5));
+    constant inl : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#19#, 5));
+    constant ini : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#1A#, 5));
+    constant mfhi : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#1A#, 5));
+    constant mflo : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#1A#, 5));
 
 
 
