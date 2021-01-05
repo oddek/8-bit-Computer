@@ -62,8 +62,9 @@ const std::vector<std::string> REGISTERS
 		"iir",
 		"xr",
 		"yr",
-		"sr",
-		"mr"
+		"mr",
+		"hi",
+		"lo"
 };
 
 //Labels need to be mapped to an address
