@@ -26,8 +26,10 @@ use IEEE.NUMERIC_STD.ALL;
 entity ControlUnit is
     Port ( clk : in STD_LOGIC;
            rst : in STD_LOGIC;
+           alu_boolean : in STD_LOGIC; 
            instr : in STD_LOGIC_VECTOR(7 downto 0);
-           alu_opcode : out STD_LOGIC_VECTOR(2 downto 0);
+           instr2 : in STD_LOGIC_VECTOR(7 downto 0); 
+           alu_opcode : out STD_LOGIC_VECTOR(4 downto 0);
            alu_out : out STD_LOGIC;
            pc_load : out STD_LOGIC;
            pc_inc : out STD_LOGIC;
@@ -51,47 +53,73 @@ architecture Behavioral of ControlUnit is
     constant REG_INSTR2_ADDR : STD_LOGIC_VECTOR(2 downto 0) := STD_LOGIC_VECTOR(to_unsigned(2, 3));
     constant REG_X_ADDR : STD_LOGIC_VECTOR(2 downto 0) := STD_LOGIC_VECTOR(to_unsigned(3, 3));
     constant REG_Y_ADDR : STD_LOGIC_VECTOR(2 downto 0) := STD_LOGIC_VECTOR(to_unsigned(4, 3));
-    constant REG_SR_ADDR : STD_LOGIC_VECTOR(2 downto 0) := STD_LOGIC_VECTOR(to_unsigned(5, 3));
-    constant REG_MEM_ADDR : STD_LOGIC_VECTOR(2 downto 0) := STD_LOGIC_VECTOR(to_unsigned(6, 3));
+    constant REG_MEM_ADDR : STD_LOGIC_VECTOR(2 downto 0) := STD_LOGIC_VECTOR(to_unsigned(5, 3));
+    constant REG_HI_ADDR : STD_LOGIC_VECTOR(2 downto 0) := STD_LOGIC_VECTOR(to_unsigned(6, 3));
+    constant REG_LO_ADDR : STD_LOGIC_VECTOR(2 downto 0) := STD_LOGIC_VECTOR(to_unsigned(7, 3));
 
     constant nop : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#00#, 5));
     constant ldw : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#01#, 5));
     constant ldi : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#02#, 5));
     constant stw : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#03#, 5));
-    constant add : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#05#, 5));
-    constant addu : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#06#, 5));
-    constant sub : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#07#, 5));
-    constant subu : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#08#, 5));
-    constant jmp : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#09#, 5));
-    constant ret : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0A#, 5));
-    constant beq : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0B#, 5));
-    constant bne : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0C#, 5));
+    constant add : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#04#, 5));
+    constant addu : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#05#, 5));
+    constant sub : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#06#, 5));
+    constant subu : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#07#, 5));
+    constant jmp : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#08#, 5));
+    constant ret : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#09#, 5));
+    constant beq : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0A#, 5));
+    constant bne : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0B#, 5));
     constant bgt : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0C#, 5));
-    constant bge : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0C#, 5));
-    constant mov : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0D#, 5));
-    constant psh : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0E#, 5));
-    constant pul : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0F#, 5));
-    constant and : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#10#, 5));
-    constant or : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#11#, 5));
-    constant not : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#12#, 5));
-    constant xor : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#13#, 5));
-    constant xnor : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#14#, 5));
-    constant sll : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#15#, 5));
-    constant srl : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#16#, 5));
-    constant mul : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#17#, 5));
-    constant div : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#18#, 5));
-    constant inl : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#19#, 5));
-    constant ini : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#1A#, 5));
-    constant mfhi : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#1A#, 5));
-    constant mflo : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#1A#, 5));
+    constant bge : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0D#, 5));
+    constant mov : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0E#, 5));
+    constant psh : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0F#, 5));
+    constant pul : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#10#, 5));
+    constant and_logical : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#11#, 5));
+    constant or_logical : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#12#, 5));
+    constant not_logical : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#13#, 5));
+    constant xor_logical : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#14#, 5));
+    constant xnor_logical : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#15#, 5));
+    constant sll_logical : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#16#, 5));
+    constant srl_logical : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#17#, 5));
+    constant mul : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#18#, 5));
+    constant div : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#19#, 5));
+    constant inl : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#1A#, 5));
+    constant ini : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#1B#, 5));
+    -- These arent necessary as they are just normal registers, and can be accessed with all other operations. 
+    -- constant mfhi : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#1A#, 5));
+    -- constant mflo : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#1A#, 5));
 
 
+    constant alu_nop : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#00#, 5));
+    constant alu_add : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#01#, 5));
+    constant alu_addu : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#02#, 5));
+    constant alu_sub : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#03#, 5));
+    constant alu_subu : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#04#, 5));
+    constant alu_equ : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#05#, 5));
+    constant alu_eqg : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#06#, 5));
+    constant alu_gre : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#07#, 5));
+    constant alu_and : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#08#, 5));
+    constant alu_or : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#09#, 5));
+    constant alu_notx : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0A#, 5));
+    constant alu_noty : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0B#, 5));
+    constant alu_xor : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0C#, 5));
+    constant alu_xnor : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0D#, 5));
+    constant alu_sxl : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0E#, 5));
+    constant alu_sxr : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0F#, 5));
+    constant alu_syl : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#10#, 5));
+    constant alu_syr : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#11#, 5));
+    constant alu_mull : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#12#, 5));
+    constant alu_mulu : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#13#, 5));
+    constant alu_divq : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#14#, 5));
+    constant alu_divr : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#15#, 5));
 
 
     type instr_arg is(first_arg, second_arg);
     signal instr_curr, instr_next : instr_arg := first_arg;
 
     signal instruction_stage, instruction_stage_next : integer := 0;
+
+    signal logical_bool : STD_LOGIC;
 
 begin
 
@@ -114,7 +142,7 @@ begin
     begin
         --Turning everything off by default:
         alu_out <= '0';
-        alu_opcode <= "000";
+        alu_opcode <= "00000";
         pc_load <= '0';
         pc_inc <= '0';
         pc_out <= '0';
@@ -137,7 +165,7 @@ begin
                 -- pc_out <= '1';
                 state_next <= read_pc;
             --Program counter out, memory register in:
-                
+
             when read_pc =>
                 reg_load <= REG_MEM_ADDR; 
                 pc_out <= '1';
@@ -160,7 +188,7 @@ begin
                         instr_next <= first_arg;
                         state_next <= instr_decode;
                     when others =>
-                        
+
                 end case;
             when instr_decode =>
                 --Enable instruction decode component
@@ -183,10 +211,10 @@ begin
                                 state_next <= read_pc;
                             when others =>
                         end case;
-                    when add =>
+                    when ldi =>
+                        -- Load constant, only needs to load value from instruction reg 2, into register chosen in argument
                         reg_load <= instr(2 downto 0);
-                        alu_out <= '1';
-                        alu_opcode <= "001";
+                        reg_out <= REG_INSTR2_ADDR;
                         state_next <= read_pc;
                     when stw =>
                         case instruction_stage is
@@ -202,6 +230,26 @@ begin
                                 instruction_stage_next <= 0;
                             when others =>
                         end case;
+                    when add =>
+                        reg_load <= instr(2 downto 0);
+                        alu_out <= '1';
+                        alu_opcode <= alu_add;
+                        state_next <= read_pc;
+                    when addu =>
+                        reg_load <= instr(2 downto 0);
+                        alu_out <= '1';
+                        alu_opcode <= alu_add;
+                        state_next <= read_pc;
+                    when sub =>
+                        reg_load <= instr(2 downto 0);
+                        alu_out <= '1';
+                        alu_opcode <= alu_sub;
+                        state_next <= read_pc;
+                    when subu =>
+                        reg_load <= instr(2 downto 0);
+                        alu_out <= '1';
+                        alu_opcode <= alu_subu;
+                        state_next <= read_pc;
                     when jmp =>
                         case instruction_stage is
                             when 0 =>
@@ -210,11 +258,14 @@ begin
                                 reg_load <= REG_MEM_ADDR;
                                 instruction_stage_next <= instruction_stage + 1;
                             when 1 =>
+                                -- Write programcounter value to memory at stackpointer location
                                 mem_load <= '1';
                                 pc_out <= '1';
+                                -- Increment stackpointer
                                 sp_inc <= '1';
                                 instruction_stage_next <= instruction_stage + 1;
-                            when 2 =>
+                            when 3 =>
+                                --Load program counter with address from jmp argument
                                 pc_load <= '1';
                                 reg_out <= REG_INSTR2_ADDR;
                                 state_next <= read_pc;
@@ -222,10 +273,296 @@ begin
                             when others =>
 
                         end case;
+                    when ret =>
+                        case instruction_stage is
+                            when 0 =>
+                                --Decrement stackpointer
+                                sp_dec <= '1';
+                                instruction_stage_next <= instruction_stage + 1;
+                                state_next <= instr_decode;
+                            when 1 =>
+                                -- Read stackpointer into memory register
+                                sp_out <= '1';
+                                reg_load <= REG_MEM_ADDR;
+                                instruction_stage_next <= instruction_stage + 1;
+                                state_next <= instr_decode;
+                            when 3 =>
+                                pc_load <= '1';
+                                mem_out <= '1';
+                                instruction_stage_next <= 0;
+                                state_next <= read_pc;
+                            when others =>
                                 
+                        end case;
+                    when beq =>
+                        case instruction_stage is
+                            when 0 =>
+                                alu_opcode <= alu_equ;
+                                instruction_stage_next <= instruction_stage + 1;
+                                state_next <= instr_decode;
+                            when 1 =>
+                                -- If it returns false, we go to next line in program counter
+                                if(alu_boolean = '0') then
+                                    instruction_stage_next <= 0;
+                                    state_next <= read_pc;
+                                else
+                                    --If not we have to do the jump
+                                    --load stackpointer into memory register
+                                    sp_out <= '1';
+                                    reg_load <= REG_MEM_ADDR;
+                                    instruction_stage_next <= instruction_stage + 1;
+                                    state_next <= instr_decode;
+                                end if;
+                            --We only get two case 2 if previous if failed.
+                            when 2 =>
+                                -- Write programcounter value to memory at stackpointer location
+                                mem_load <= '1';
+                                pc_out <= '1';
+                                -- Increment stackpointer
+                                sp_inc <= '1';
+                                instruction_stage_next <= instruction_stage + 1;
+                            when 3 =>
+                                --Load program counter with address from jmp argument
+                                pc_load <= '1';
+                                reg_out <= REG_INSTR2_ADDR;
+                                state_next <= read_pc;
+                                instruction_stage_next <= 0;
+                           when others =>
+                        end case;
+                    when bne =>
+                        case instruction_stage is
+                            when 0 =>
+                                alu_opcode <= alu_equ;
+                                instruction_stage_next <= instruction_stage + 1;
+                                state_next <= instr_decode;
+                            when 1 =>
+                                -- If it returns true, we go to next line in program counter
+                                if(alu_boolean = '1') then
+                                    instruction_stage_next <= 0;
+                                    state_next <= read_pc;
+                                else
+                                    --If not we have to do the jump
+                                    --load stackpointer into memory register
+                                    sp_out <= '1';
+                                    reg_load <= REG_MEM_ADDR;
+                                    instruction_stage_next <= instruction_stage + 1;
+                                    state_next <= instr_decode;
+                                end if;
+                            --We only get two case 2 if previous if failed.
+                            when 2 =>
+                                -- Write programcounter value to memory at stackpointer location
+                                mem_load <= '1';
+                                pc_out <= '1';
+                                -- Increment stackpointer
+                                sp_inc <= '1';
+                                instruction_stage_next <= instruction_stage + 1;
+                            when 3 =>
+                                --Load program counter with address from jmp argument
+                                pc_load <= '1';
+                                reg_out <= REG_INSTR2_ADDR;
+                                state_next <= read_pc;
+                                instruction_stage_next <= 0;
+                            when others =>
+                        end case;
+
+                    when bgt =>
+                        case instruction_stage is
+                            when 0 =>
+                                alu_opcode <= alu_gre;
+                                instruction_stage_next <= instruction_stage + 1;
+                                state_next <= instr_decode;
+                            when 1 =>
+                                -- If it returns true, we go to next line in program counter
+                                if(alu_boolean = '0') then
+                                    instruction_stage_next <= 0;
+                                    state_next <= read_pc;
+                                else
+                                    --If not we have to do the jump
+                                    --load stackpointer into memory register
+                                    sp_out <= '1';
+                                    reg_load <= REG_MEM_ADDR;
+                                    instruction_stage_next <= instruction_stage + 1;
+                                    state_next <= instr_decode;
+                                end if;
+                            --We only get two case 2 if previous if failed.
+                            when 2 =>
+                                -- Write programcounter value to memory at stackpointer location
+                                mem_load <= '1';
+                                pc_out <= '1';
+                                -- Increment stackpointer
+                                sp_inc <= '1';
+                                instruction_stage_next <= instruction_stage + 1;
+                            when 3 =>
+                                --Load program counter with address from jmp argument
+                                pc_load <= '1';
+                                reg_out <= REG_INSTR2_ADDR;
+                                state_next <= read_pc;
+                                instruction_stage_next <= 0;
+                            when others =>
+                        end case;
+
+                    when bge =>
+                        case instruction_stage is
+                            when 0 =>
+                                alu_opcode <= alu_eqg;
+                                instruction_stage_next <= instruction_stage + 1;
+                                state_next <= instr_decode;
+                            when 1 =>
+                                -- If it returns true, we go to next line in program counter
+                                if(alu_boolean = '0') then
+                                    instruction_stage_next <= 0;
+                                    state_next <= read_pc;
+                                else
+                                    --If not we have to do the jump
+                                    --load stackpointer into memory register
+                                    sp_out <= '1';
+                                    reg_load <= REG_MEM_ADDR;
+                                    instruction_stage_next <= instruction_stage + 1;
+                                    state_next <= instr_decode;
+                                end if;
+                            --We only get two case 2 if previous if failed.
+                            when 2 =>
+                                -- Write programcounter value to memory at stackpointer location
+                                mem_load <= '1';
+                                pc_out <= '1';
+                                -- Increment stackpointer
+                                sp_inc <= '1';
+                                instruction_stage_next <= instruction_stage + 1;
+                            when 3 =>
+                                --Load program counter with address from jmp argument
+                                pc_load <= '1';
+                                reg_out <= REG_INSTR2_ADDR;
+                                state_next <= read_pc;
+                                instruction_stage_next <= 0;
+                            when others =>
+                        end case;
+
+                    when mov =>
+                        reg_load <= instr(2 downto 0);
+                        reg_out <= instr2(2 downto 0);
+                        state_next <= read_pc;
+                    when psh =>
+                        case instruction_stage is
+                            when 0 =>
+                                --load stackpointer into memory register
+                                sp_out <= '1';
+                                reg_load <= REG_MEM_ADDR;
+                                instruction_stage_next <= instruction_stage + 1;
+                            when 1 =>
+                                -- Write register value to memory at stackpointer location
+                                mem_load <= '1';
+                                reg_out <= instr(2 downto 0);
+                                -- Increment stackpointer
+                                sp_inc <= '1';
+                                instruction_stage_next <= 0;
+                                state_next <= read_pc;
+                            when others =>
+                        end case;
+
+                    when pul =>
+                        case instruction_stage is
+                            when 0 =>
+                                --Decrement stackpointer
+                                sp_dec <= '1';
+                                instruction_stage_next <= instruction_stage + 1;
+                                state_next <= instr_decode;
+                            when 1 =>
+                                -- Read stackpointer into memory register
+                                sp_out <= '1';
+                                reg_load <= REG_MEM_ADDR;
+                                instruction_stage_next <= instruction_stage + 1;
+                                state_next <= instr_decode;
+                            when 2 =>
+                                -- REad contents of memory at stackpointer into register from argument
+                                reg_load <= instr(2 downto 0);
+                                mem_out <= '1';
+                                instruction_stage_next <= 0;
+                                state_next <= read_pc;
+                            when others =>
+                        end case;
+
+                    when and_logical =>
+                        reg_load <= instr(2 downto 0);
+                        alu_out <= '1';
+                        alu_opcode <= alu_and;
+                        state_next <= read_pc;
+                    when or_logical =>
+                        reg_load <= instr(2 downto 0);
+                        alu_out <= '1';
+                        alu_opcode <= alu_or;
+                        state_next <= read_pc;
+                    when not_logical =>
+
+                    when xor_logical =>
+                        reg_load <= instr(2 downto 0);
+                        alu_out <= '1';
+                        alu_opcode <= alu_xor;
+                        state_next <= read_pc;
+                    when xnor_logical =>
+                        reg_load <= instr(2 downto 0);
+                        alu_out <= '1';
+                        alu_opcode <= alu_xnor;
+                        state_next <= read_pc;
+                    when sll_logical =>
+                        --First figure out if it is X or Y reg we want to shift
+                        if(instr(2 downto 0) = REG_X_ADDR) then
+                            alu_opcode <= alu_sxl;
+                        else
+                            alu_opcode <= alu_syl;
+                        end if;
+                        -- Read from alu back into the same register
+                        alu_out <= '1';
+                        reg_load <= instr(2 downto 0);
+                        state_next <= read_pc;
+                    when srl_logical =>
+                        --First figure out if it is X or Y reg we want to shift
+                        if(instr(2 downto 0) = REG_X_ADDR) then
+                            alu_opcode <= alu_sxr;
+                        else
+                            alu_opcode <= alu_syr;
+                        end if;
+                        -- Read from alu back into the same register
+                        alu_out <= '1';
+                        reg_load <= instr(2 downto 0);
+                        state_next <= read_pc;
+
+                    when mul =>
+                        case instruction_stage is 
+                            when 0 =>
+                                reg_load <= REG_HI_ADDR;
+                                alu_out <= '1';
+                                alu_opcode <= alu_mulu;
+                                instruction_stage_next <= instruction_stage + 1;
+                                state_next <= instr_decode;
+                            when 1 =>
+                                reg_load <= REG_LO_ADDR;
+                                alu_out <= '1';
+                                alu_opcode <= alu_mull;
+                                instruction_stage_next <= 0;
+                                state_next <= read_pc;
+                            when others =>
+                        end case;
+                    when div =>
+                        case instruction_stage is 
+                            when 0 =>
+                                reg_load <= REG_HI_ADDR;
+                                alu_out <= '1';
+                                alu_opcode <= alu_divq;
+                                instruction_stage_next <= instruction_stage + 1;
+                                state_next <= instr_decode;
+                            when 1 =>
+                                reg_load <= REG_LO_ADDR;
+                                alu_out <= '1';
+                                alu_opcode <= alu_divr;
+                                instruction_stage_next <= 0;
+                                state_next <= read_pc;
+                            when others =>
+                        end case;
+                    when inl =>
+
+                    when ini =>
 
                     when others =>
-
                 end case;
             when exe =>
             --Enable alu with suitable opcode

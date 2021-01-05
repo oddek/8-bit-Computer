@@ -38,8 +38,10 @@ architecture Behavioral of CPU is
     Component ControlUnit 
     Port ( clk : in STD_LOGIC;
            rst : in STD_LOGIC;
+           alu_boolean : in STD_LOGIC; 
            instr : in STD_LOGIC_VECTOR(7 downto 0);
-           alu_opcode : out STD_LOGIC_VECTOR(2 downto 0);
+           instr2 : in STD_LOGIC_VECTOR(7 downto 0);
+           alu_opcode : out STD_LOGIC_VECTOR(4 downto 0);
            alu_out : out STD_LOGIC;
            pc_load : out STD_LOGIC;
            pc_inc : out STD_LOGIC;
@@ -86,7 +88,7 @@ architecture Behavioral of CPU is
     --RegisterBank signals
     signal reg_out : STD_LOGIC_VECTOR(2 downto 0);
     signal reg_load : STD_LOGIC_VECTOR(2 downto 0);
-    signal reg2AluX, reg2AluY, instr2CU : STD_LOGIC_VECTOR(7 downto 0);
+    signal reg2AluX, reg2AluY, instr2CU, instr2CU2 : STD_LOGIC_VECTOR(7 downto 0);
 
     Component RegisterBank 
         Generic( addr_width : integer := 3;
@@ -97,29 +99,32 @@ architecture Behavioral of CPU is
                reg_load : in STD_LOGIC_VECTOR(addr_width-1 downto 0);
                mem_addr : out STD_LOGIC_VECTOR(7 downto 0);
                instr2CU : out STD_LOGIC_VECTOR(7 downto 0);
+               instr2CU2 : out STD_LOGIC_VECTOR(7 downto 0);
                aluBusX : out STD_LOGIC_VECTOR(data_width-1 downto 0);
                aluBusY : out STD_LOGIC_VECTOR(data_width-1 downto 0);
                dataBus : inout STD_LOGIC_VECTOR (data_width-1 downto 0));
     end Component;
 
     --ALU signals
-    signal alu_opcode : STD_LOGIC_VECTOR(2 downto 0);
+    signal alu_opcode : STD_LOGIC_VECTOR(4 downto 0);
     signal alu_en : STD_LOGIC;
+    signal alu_boolean : STD_LOGIC;
 
     Component ALU 
-        Generic(code_width : integer := 3;
+        Generic(code_width : integer := 5;
                 data_width : integer := 8);
         Port ( opcode : in STD_LOGIC_VECTOR (code_width-1 downto 0);
                en : STD_LOGIC;
                x : in STD_LOGIC_VECTOR (data_width-1 downto 0);
                y : in STD_LOGIC_VECTOR (data_width-1 downto 0);
+               logical_bool : out STD_LOGIC;
                Z : out STD_LOGIC_VECTOR (data_width-1 downto 0));
     end Component;
 
 
 begin
     --Instantiation CONTROLUNIT
-    cu : ControlUnit port map(clk => clk, rst => rst, instr => instr2CU, alu_opcode => alu_opcode, alu_out => alu_en, mem_load => rw, mem_out => mem_en, pc_load => pc_load, pc_inc => pc_inc, pc_out => pc_en, reg_load => reg_load, reg_out => reg_out, sp_out => sp_en, sp_inc => sp_inc, sp_dec => sp_dec);
+    cu : ControlUnit port map(clk => clk, rst => rst, instr => instr2CU, instr2 => instr2CU2, alu_opcode => alu_opcode, alu_boolean => alu_boolean, alu_out => alu_en, mem_load => rw, mem_out => mem_en, pc_load => pc_load, pc_inc => pc_inc, pc_out => pc_en, reg_load => reg_load, reg_out => reg_out, sp_out => sp_en, sp_inc => sp_inc, sp_dec => sp_dec);
 
     --Instantiation PROGRAMCOUNTER
     pc : ProgramCounter port map(rst => rst, clk => clk, en => pc_en, inc => pc_inc, load => pc_load, dataBus => dataBus);
@@ -128,9 +133,9 @@ begin
     sp : StackPointer port map(clk => clk, rst => rst, en => sp_en, inc => sp_inc, dec => sp_dec, q => dataBus);
 
     --Instantiation REGISTERBANK
-    registers : RegisterBank port map(clk => clk, rst => rst, reg_out => reg_out, reg_load => reg_load, mem_addr => addr, instr2CU => instr2CU, aluBusX => reg2AluX, aluBusY => reg2AluY, dataBus => dataBus);
+    registers : RegisterBank port map(clk => clk, rst => rst, reg_out => reg_out, reg_load => reg_load, mem_addr => addr, instr2CU => instr2CU, instr2CU2 => instr2CU2, aluBusX => reg2AluX, aluBusY => reg2AluY, dataBus => dataBus);
 
     --Instantiation ALU
-    aluInst : ALU port map(opcode => alu_opcode, en => alu_en, x => reg2AluX, y => reg2AluY, Z => dataBus);
+    aluInst : ALU port map(opcode => alu_opcode, en => alu_en, x => reg2AluX, y => reg2AluY, logical_bool => alu_boolean, Z => dataBus);
 
 end Behavioral;

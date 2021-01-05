@@ -30,21 +30,133 @@ use IEEE.NUMERIC_STD.ALL;
 --...
 
 entity ALU is
-    Generic(code_width : integer := 3;
+    Generic(code_width : integer := 5;
             data_width : integer := 8);
     Port ( opcode : in STD_LOGIC_VECTOR (code_width-1 downto 0);
            en : STD_LOGIC;
            x : in STD_LOGIC_VECTOR (data_width-1 downto 0);
            y : in STD_LOGIC_VECTOR (data_width-1 downto 0);
+           logical_bool : out STD_LOGIC;
            Z : out STD_LOGIC_VECTOR (data_width-1 downto 0));
 end ALU;
 
 architecture Behavioral of ALU is
+    signal temp : STD_LOGIC_VECTOR(data_width-1 downto 0);
+    signal tempUpper : STD_LOGIC_VECTOR(data_width-1 downto 0);
+
+
+    signal x_signed : signed(x'Range);
+    signal y_signed : signed(y'Range);
+    signal x_unsigned : unsigned(x'Range);
+    signal y_unsigned : unsigned(y'Range);
+
+    signal mul_temp : STD_LOGIC_VECTOR((data_width * 2) - 1 downto 0);
 
 begin
-    Z <= x + y when opcode = "001" else--std_logic_vector(signed(x) + signed(y)) when opcode = "001" else
-         std_logic_vector(signed(x) - signed(y)) when opcode = "010" else
-         (others => 'Z');
 
+    x_signed <= signed(x);
+    y_signed <= signed(y);
+    x_unsigned <= unsigned(x);
+    y_unsigned <= unsigned(y);
+
+    process(opcode, x, y)
+    begin
+        case opcode is
+            --Noop
+            when "00000" =>
+                null;
+            --Add signed
+            when "00001" =>
+                temp <= std_logic_vector(x_signed + y_signed); 
+            --Add unsigned
+            when "00010" =>
+                temp <= std_logic_vector(x_unsigned + y_unsigned);
+            --Sub signed
+            when "00011" =>
+                temp <= std_logic_vector(x_signed - y_signed);
+            --Sub unsigned
+            when "00100" =>
+                temp <= std_logic_vector(x_unsigned - y_unsigned);
+            -- Equals
+            when "00101" =>
+                if(x_signed = y_signed) then
+                    logical_bool <= '1';
+                    temp <= (others => '1');
+                else
+                    logical_bool <= '0';
+                    temp <= (others => '0');
+                end if;
+            --Greater or equal
+            when "00110" =>
+                if(x_signed >= y_signed) then
+                    logical_bool <= '1';
+                    temp <= (others => '1');
+                else
+                    logical_bool <= '0';
+                    temp <= (others => '0');
+                end if;
+            --Greater than
+            when "00111" =>
+                if(x_signed > y_signed) then
+                    logical_bool <= '1';
+                    temp <= (others => '1');
+                else
+                    temp <= (others => '0');
+                    logical_bool <= '0';
+                end if;
+            -- AND
+            when "01000" =>
+                temp <= x and y;
+            -- OR
+            when "01001" =>
+                temp <= x or y;
+            --NOT X
+            when "01010" =>
+                temp <= not x;
+            --NOT Y
+            when "01011" =>
+                temp <= not y;
+            -- XOR
+            when "01100" =>
+                temp <= x xor y;
+            -- XNOR
+            when "01101" =>
+                temp <= x xnor y;
+            -- SXL (shift X reg left)
+            when "01110" =>
+                temp <= x(6 downto 0) & '0';
+            -- SXR (shift X reg right) 
+            when "01111" =>
+                temp <= '0' & x(7 downto 1);
+            -- SYL (shift Y reg left)
+            when "10000" =>
+                temp <= y(6 downto 0) & '0';
+
+            --SYR (shift Y reg right)
+            when "10001" =>
+                temp <= '0' & y(7 downto 1);
+
+            -- MULL (Multiply, return lower bits)
+            when "10010" =>
+                mul_temp <= std_logic_vector(x_signed * y_signed);
+                temp <= mul_temp(7 downto 0);
+            -- MULU (Multiply, return upper bits)
+            when "10011" =>
+                mul_temp <= std_logic_vector(x_signed * y_signed);
+                temp <= mul_temp(15 downto 8);
+            -- DIVQ, (Divide, return Quotient)
+            when "10100" =>
+                --TO BE IMPLEMENTED
+                temp <= (others => '0');
+            -- DIVR (Divide, return remainder)
+            when "10101" =>
+                --TO BE IMPLEMENTED
+                temp <= (others => '0');
+            when others =>
+        end case;
+    end process;
+
+    Z <= temp when en = '1' else
+         (others => 'Z');
 
 end Behavioral;
