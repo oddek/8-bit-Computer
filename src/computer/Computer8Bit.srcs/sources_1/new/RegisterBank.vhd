@@ -86,7 +86,7 @@ begin
      --instruction register 2, ADDRESS argument 
      reg_instr_addr : PIPORegister
      generic map(data_width => 8)
-     port map(clk => clk, rst => rst, en => en_instr2, load => load_instr2, q => open, dataBus => dataBus);
+     port map(clk => clk, rst => rst, en => en_instr2, load => load_instr2, q => instr2CU2, dataBus => dataBus);
 
     --X register
      reg_x : PIPORegister

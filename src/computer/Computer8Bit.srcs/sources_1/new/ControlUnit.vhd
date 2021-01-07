@@ -34,6 +34,9 @@ entity ControlUnit is
            pc_load : out STD_LOGIC;
            pc_inc : out STD_LOGIC;
            pc_out : out STD_LOGIC;
+           ip_load : out STD_LOGIC;
+           ip_inc : out STD_LOGIC;
+           ip_out : out STD_LOGIC;
            sp_inc : out STD_LOGIC;
            sp_dec : out STD_LOGIC;
            sp_out : out STD_LOGIC;
@@ -138,7 +141,7 @@ begin
 
 
     --Next state logic
-    process(state_reg, instr, instr_curr, instruction_stage)
+    process(state_reg, instr, instr_curr, instruction_stage, logical_bool)
     begin
         --Turning everything off by default:
         alu_out <= '0';
@@ -204,6 +207,7 @@ begin
                                 reg_load <= REG_MEM_ADDR;
                                 reg_out <= REG_INSTR2_ADDR;
                                 instruction_stage_next <= instruction_stage + 1;
+                                state_next <= instr_decode;
                             when 1 =>
                                 reg_load <= instr(2 downto 0);
                                 mem_out <= '1';
@@ -222,6 +226,7 @@ begin
                                 reg_load <= REG_MEM_ADDR;
                                 reg_out <= REG_INSTR2_ADDR;
                                 instruction_stage_next <= instruction_stage + 1;
+                                state_next <= instr_decode;
                             when 1 =>
                                 reg_out <= instr(2 downto 0);
 
@@ -257,6 +262,7 @@ begin
                                 sp_out <= '1';
                                 reg_load <= REG_MEM_ADDR;
                                 instruction_stage_next <= instruction_stage + 1;
+                                state_next <= instr_decode;
                             when 1 =>
                                 -- Write programcounter value to memory at stackpointer location
                                 mem_load <= '1';
@@ -264,7 +270,8 @@ begin
                                 -- Increment stackpointer
                                 sp_inc <= '1';
                                 instruction_stage_next <= instruction_stage + 1;
-                            when 3 =>
+                                state_next <= instr_decode;
+                            when 2 =>
                                 --Load program counter with address from jmp argument
                                 pc_load <= '1';
                                 reg_out <= REG_INSTR2_ADDR;
@@ -286,7 +293,7 @@ begin
                                 reg_load <= REG_MEM_ADDR;
                                 instruction_stage_next <= instruction_stage + 1;
                                 state_next <= instr_decode;
-                            when 3 =>
+                            when 2 =>
                                 pc_load <= '1';
                                 mem_out <= '1';
                                 instruction_stage_next <= 0;
@@ -321,6 +328,7 @@ begin
                                 -- Increment stackpointer
                                 sp_inc <= '1';
                                 instruction_stage_next <= instruction_stage + 1;
+                                state_next <= instr_decode;
                             when 3 =>
                                 --Load program counter with address from jmp argument
                                 pc_load <= '1';
@@ -356,6 +364,7 @@ begin
                                 -- Increment stackpointer
                                 sp_inc <= '1';
                                 instruction_stage_next <= instruction_stage + 1;
+                                state_next <= instr_decode;
                             when 3 =>
                                 --Load program counter with address from jmp argument
                                 pc_load <= '1';
@@ -392,6 +401,7 @@ begin
                                 -- Increment stackpointer
                                 sp_inc <= '1';
                                 instruction_stage_next <= instruction_stage + 1;
+                                state_next <= instr_decode;
                             when 3 =>
                                 --Load program counter with address from jmp argument
                                 pc_load <= '1';
@@ -428,6 +438,7 @@ begin
                                 -- Increment stackpointer
                                 sp_inc <= '1';
                                 instruction_stage_next <= instruction_stage + 1;
+                                state_next <= instr_decode;
                             when 3 =>
                                 --Load program counter with address from jmp argument
                                 pc_load <= '1';
@@ -448,6 +459,7 @@ begin
                                 sp_out <= '1';
                                 reg_load <= REG_MEM_ADDR;
                                 instruction_stage_next <= instruction_stage + 1;
+                                state_next <= instr_decode;
                             when 1 =>
                                 -- Write register value to memory at stackpointer location
                                 mem_load <= '1';
@@ -492,7 +504,15 @@ begin
                         alu_opcode <= alu_or;
                         state_next <= read_pc;
                     when not_logical =>
-
+                        if(instr(2 downto 0) = REG_X_ADDR) then
+                            alu_opcode <= alu_notx;
+                            reg_load <= REG_X_ADDR;
+                        else
+                            alu_opcode <= alu_noty;
+                            reg_load <= REG_Y_ADDR;
+                        end if;
+                        alu_out <= '1';
+                        state_next <= read_pc;
                     when xor_logical =>
                         reg_load <= instr(2 downto 0);
                         alu_out <= '1';
@@ -559,8 +579,13 @@ begin
                             when others =>
                         end case;
                     when inl =>
-
+                        --Load instruction
+                        ip_load <= '1';
+                        reg_out <= REG_INSTR2_ADDR;
+                        state_next <= read_pc;
                     when ini =>
+                        ip_inc <= '1';
+                        state_next <= read_pc;
 
                     when others =>
                 end case;

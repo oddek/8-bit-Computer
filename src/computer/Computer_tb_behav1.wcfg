@@ -10,15 +10,21 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="550fs"></ZoomStartTime>
-      <ZoomEndTime time="690fs"></ZoomEndTime>
-      <Cursor1Time time="1000000fs"></Cursor1Time>
+      <ZoomStartTime time="1251fs"></ZoomStartTime>
+      <ZoomEndTime time="1313fs"></ZoomEndTime>
+      <Cursor1Time time="999701fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="180"></NameColumnWidth>
+      <NameColumnWidth column_width="168"></NameColumnWidth>
       <ValueColumnWidth column_width="66"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="21" />
+   <WVObjectSize size="28" />
+   <wave_markers>
+      <marker label="" time="630" />
+      <marker label="" time="1000000" />
+      <marker label="" time="999995" />
+      <marker label="" time="999701" />
+   </wave_markers>
    <wvobject type="logic" fp_name="/Computer_tb/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -43,6 +49,7 @@
    <wvobject type="array" fp_name="/Computer_tb/UUT/dataBus">
       <obj_property name="ElementShortName">dataBus[7:0]</obj_property>
       <obj_property name="ObjectShortName">dataBus[7:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/Computer_tb/UUT/addrBus">
       <obj_property name="ElementShortName">addrBus[7:0]</obj_property>
@@ -103,5 +110,33 @@
    <wvobject type="array" fp_name="/Computer_tb/UUT/processor/aluInst/Z">
       <obj_property name="ElementShortName">Z[7:0]</obj_property>
       <obj_property name="ObjectShortName">Z[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/processor/aluInst/mul_temp">
+      <obj_property name="ElementShortName">mul_temp[15:0]</obj_property>
+      <obj_property name="ObjectShortName">mul_temp[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/processor/aluInst/temp">
+      <obj_property name="ElementShortName">temp[7:0]</obj_property>
+      <obj_property name="ObjectShortName">temp[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/processor/registers/reg_hi/reg">
+      <obj_property name="ElementShortName">reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/processor/registers/reg_lo/reg">
+      <obj_property name="ElementShortName">reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/processor/registers/reg_out">
+      <obj_property name="ElementShortName">reg_out[2:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_out[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/processor/registers/reg_load">
+      <obj_property name="ElementShortName">reg_load[2:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_load[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/processor/cu/instr2">
+      <obj_property name="ElementShortName">instr2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">instr2[7:0]</obj_property>
    </wvobject>
 </wave_config>

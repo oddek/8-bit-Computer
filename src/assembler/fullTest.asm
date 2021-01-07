@@ -21,8 +21,6 @@
 	beq func ; jump to function
 	bgt func 
 	bge func
-	mfhi mr
-	mflo xr
 loop:
 	nop
 	mov xr yr		

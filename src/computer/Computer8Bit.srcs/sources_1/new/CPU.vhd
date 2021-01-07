@@ -36,23 +36,26 @@ architecture Behavioral of CPU is
 
 
     Component ControlUnit 
-    Port ( clk : in STD_LOGIC;
-           rst : in STD_LOGIC;
-           alu_boolean : in STD_LOGIC; 
-           instr : in STD_LOGIC_VECTOR(7 downto 0);
-           instr2 : in STD_LOGIC_VECTOR(7 downto 0);
-           alu_opcode : out STD_LOGIC_VECTOR(4 downto 0);
-           alu_out : out STD_LOGIC;
-           pc_load : out STD_LOGIC;
-           pc_inc : out STD_LOGIC;
-           pc_out : out STD_LOGIC;
-           sp_inc : out STD_LOGIC;
-           sp_dec : out STD_LOGIC;
-           sp_out : out STD_LOGIC;
-           reg_load : out STD_LOGIC_VECTOR(2 downto 0);
-           reg_out : out STD_LOGIC_VECTOR(2 downto 0);
-           mem_load : out STD_LOGIC;
-           mem_out : out STD_LOGIC);
+        Port ( clk : in STD_LOGIC;
+               rst : in STD_LOGIC;
+               alu_boolean : in STD_LOGIC; 
+               instr : in STD_LOGIC_VECTOR(7 downto 0);
+               instr2 : in STD_LOGIC_VECTOR(7 downto 0);
+               alu_opcode : out STD_LOGIC_VECTOR(4 downto 0);
+               alu_out : out STD_LOGIC;
+               pc_load : out STD_LOGIC;
+               pc_inc : out STD_LOGIC;
+               pc_out : out STD_LOGIC;
+               ip_load : out STD_LOGIC;
+               ip_inc : out STD_LOGIC;
+               ip_out : out STD_LOGIC;
+               sp_inc : out STD_LOGIC;
+               sp_dec : out STD_LOGIC;
+               sp_out : out STD_LOGIC;
+               reg_load : out STD_LOGIC_VECTOR(2 downto 0);
+               reg_out : out STD_LOGIC_VECTOR(2 downto 0);
+               mem_load : out STD_LOGIC;
+               mem_out : out STD_LOGIC);
     end Component;
 
     --Program counter signals
@@ -69,6 +72,22 @@ architecture Behavioral of CPU is
                en 		: in STD_LOGIC;
                load     : in STD_LOGIC;
                dataBus	: inout STD_LOGIC_VECTOR (N-1 downto 0));
+    end Component;
+
+    --Index Register signals
+    signal ip_inc : STD_LOGIC;
+    signal ip_load : STD_LOGIC;
+    signal ip_en : STD_LOGIC;
+
+    Component IndexRegister
+        generic(N : integer := 8;
+                M : integer := 256);
+        Port ( rst 		: in STD_LOGIC;
+               clk 		: in STD_LOGIC;
+               en 		: in STD_LOGIC;
+               inc : in STD_LOGIC;
+               load : in STD_LOGIC;
+               dataBus : inout STD_LOGIC_VECTOR (N-1 downto 0));
     end Component;
 
     --StackPointer signals:
@@ -124,18 +143,92 @@ architecture Behavioral of CPU is
 
 begin
     --Instantiation CONTROLUNIT
-    cu : ControlUnit port map(clk => clk, rst => rst, instr => instr2CU, instr2 => instr2CU2, alu_opcode => alu_opcode, alu_boolean => alu_boolean, alu_out => alu_en, mem_load => rw, mem_out => mem_en, pc_load => pc_load, pc_inc => pc_inc, pc_out => pc_en, reg_load => reg_load, reg_out => reg_out, sp_out => sp_en, sp_inc => sp_inc, sp_dec => sp_dec);
+    cu : ControlUnit 
+    port map
+    (
+        clk => clk,
+        rst => rst,
+        instr => instr2CU,
+        instr2 => instr2CU2,
+        alu_opcode => alu_opcode,
+        alu_boolean => alu_boolean,
+        alu_out => alu_en,
+        mem_load => rw,
+        mem_out => mem_en,
+        pc_load => pc_load,
+        pc_inc => pc_inc,
+        pc_out => pc_en,
+        ip_load => ip_load,
+        ip_inc => ip_inc,
+        ip_out => ip_en,
+        reg_load => reg_load,
+        reg_out => reg_out,
+        sp_out => sp_en,
+        sp_inc => sp_inc,
+        sp_dec => sp_dec
+    );
 
     --Instantiation PROGRAMCOUNTER
-    pc : ProgramCounter port map(rst => rst, clk => clk, en => pc_en, inc => pc_inc, load => pc_load, dataBus => dataBus);
+    pc : ProgramCounter 
+    port map
+    (
+        rst => rst,
+        clk => clk,
+        en => pc_en,
+        inc => pc_inc,
+        load => pc_load,
+        dataBus => dataBus
+    );
+
+    --Instantiation IndexRegister
+    ip : IndexRegister 
+    port map
+    (
+        rst => rst,
+        clk => clk,
+        en => ip_en,
+        inc => ip_inc,
+        load => ip_load,
+        dataBus => dataBus
+    );
 
     --Instantiation StackPointer
-    sp : StackPointer port map(clk => clk, rst => rst, en => sp_en, inc => sp_inc, dec => sp_dec, q => dataBus);
+    sp : StackPointer 
+    port map
+    (
+        clk => clk,
+        rst => rst,
+        en => sp_en,
+        inc => sp_inc,
+        dec => sp_dec,
+        q => dataBus
+    );
 
     --Instantiation REGISTERBANK
-    registers : RegisterBank port map(clk => clk, rst => rst, reg_out => reg_out, reg_load => reg_load, mem_addr => addr, instr2CU => instr2CU, instr2CU2 => instr2CU2, aluBusX => reg2AluX, aluBusY => reg2AluY, dataBus => dataBus);
+    registers : RegisterBank 
+    port map
+    (
+        clk => clk,
+        rst => rst,
+        reg_out => reg_out,
+        reg_load => reg_load,
+        mem_addr => addr,
+        instr2CU => instr2CU,
+        instr2CU2 => instr2CU2,
+        aluBusX => reg2AluX,
+        aluBusY => reg2AluY, dataBus => dataBus
+    );
 
-    --Instantiation ALU
-    aluInst : ALU port map(opcode => alu_opcode, en => alu_en, x => reg2AluX, y => reg2AluY, logical_bool => alu_boolean, Z => dataBus);
+                                      --Instantiation ALU
+    aluInst : ALU 
+    port map
+    (
+        opcode => alu_opcode,
+        en => alu_en,
+        x => reg2AluX,
+        y => reg2AluY,
+        logical_bool => alu_boolean,
+        Z => dataBus
+    );
 
 end Behavioral;

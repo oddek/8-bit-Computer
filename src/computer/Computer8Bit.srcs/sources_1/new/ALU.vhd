@@ -24,10 +24,6 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
---Opcodes
---ADD 000
---SUB 001
---...
 
 entity ALU is
     Generic(code_width : integer := 5;
@@ -50,9 +46,33 @@ architecture Behavioral of ALU is
     signal x_unsigned : unsigned(x'Range);
     signal y_unsigned : unsigned(y'Range);
 
-    signal mul_temp : STD_LOGIC_VECTOR((data_width * 2) - 1 downto 0);
+    signal mul_temp : STD_LOGIC_VECTOR((data_width * 2) - 1 downto 0) := (others => '0');
+
+    constant alu_nop : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#00#, 5));
+    constant alu_add : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#01#, 5));
+    constant alu_addu : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#02#, 5));
+    constant alu_sub : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#03#, 5));
+    constant alu_subu : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#04#, 5));
+    constant alu_equ : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#05#, 5));
+    constant alu_eqg : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#06#, 5));
+    constant alu_gre : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#07#, 5));
+    constant alu_and : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#08#, 5));
+    constant alu_or : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#09#, 5));
+    constant alu_notx : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0A#, 5));
+    constant alu_noty : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0B#, 5));
+    constant alu_xor : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0C#, 5));
+    constant alu_xnor : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0D#, 5));
+    constant alu_sxl : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0E#, 5));
+    constant alu_sxr : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#0F#, 5));
+    constant alu_syl : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#10#, 5));
+    constant alu_syr : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#11#, 5));
+    constant alu_mull : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#12#, 5));
+    constant alu_mulu : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#13#, 5));
+    constant alu_divq : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#14#, 5));
+    constant alu_divr : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#15#, 5));
 
 begin
+    --Todo: Bytt ut verdier med variabler i case
 
     x_signed <= signed(x);
     y_signed <= signed(y);
@@ -143,7 +163,11 @@ begin
             -- MULU (Multiply, return upper bits)
             when "10011" =>
                 mul_temp <= std_logic_vector(x_signed * y_signed);
-                temp <= mul_temp(15 downto 8);
+                -- if(mul_temp(15 downto 8) = "00000000") then
+                    -- temp <= (others => '0');
+                -- else
+                    temp <= mul_temp(15 downto 8);
+                -- end if;
             -- DIVQ, (Divide, return Quotient)
             when "10100" =>
                 --TO BE IMPLEMENTED
