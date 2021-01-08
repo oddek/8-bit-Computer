@@ -18,7 +18,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project consists of an 8 bit computer simulated in VHDL, as well as an assembler written in C++. Done to get an incresed understanding of computer architecture and VHDL. 
+This project consists of an 8 bit computer simulated in VHDL, as well as an assembler written in C++. My goal was to get an incresed understanding of computer architecture and VHDL. 
 
 The main inspiration for this project came from [Ben Eater](https://eater.net/), who on his youtube channel has done detailed implementations of an 8-bit computer and a 6502 computer, on breadboards. My computer ended up being quite different, as it is of course a lot easier to implement a large project in VHDL than on breadboards. However, his excellent explanations gave me the understanding necessary to even attempt a project like this. 
 
