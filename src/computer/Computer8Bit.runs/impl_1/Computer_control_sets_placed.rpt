@@ -1,0 +1,98 @@
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2020.2 (lin64) Build 3064766 Wed Nov 18 09:12:47 MST 2020
+| Date         : Sat Jan  9 19:41:47 2021
+| Host         : kent-ThinkPad-T580 running 64-bit Ubuntu 20.04.1 LTS
+| Command      : report_control_sets -verbose -file Computer_control_sets_placed.rpt
+| Design       : Computer
+| Device       : xc7a35t
+-------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |    20 |
+|    Minimum number of control sets                        |    20 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |    36 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |    20 |
+| >= 0 to < 4        |     2 |
+| >= 4 to < 6        |     3 |
+| >= 6 to < 8        |     0 |
+| >= 8 to < 10       |     9 |
+| >= 10 to < 12      |     0 |
+| >= 12 to < 14      |     0 |
+| >= 14 to < 16      |     0 |
+| >= 16              |     6 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |              25 |            9 |
+| No           | No                    | Yes                    |              31 |           10 |
+| No           | Yes                   | No                     |               0 |            0 |
+| Yes          | No                    | No                     |              17 |            5 |
+| Yes          | No                    | Yes                    |             123 |           50 |
+| Yes          | Yes                   | No                     |               0 |            0 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++----------------------------------------------------+-----------------------------------------------------------------+------------------+------------------+----------------+--------------+
+|                    Clock Signal                    |                          Enable Signal                          | Set/Reset Signal | Slice Load Count | Bel Load Count | Bels / Slice |
++----------------------------------------------------+-----------------------------------------------------------------+------------------+------------------+----------------+--------------+
+|  processor/registers/reg_op/reg_reg[0]_9           |                                                                 |                  |                1 |              1 |         1.00 |
+| ~modMillionCounter/r_reg_reg[0]_0_BUFG             | processor/registers/reg_mem/E[0]                                | rst_IBUF         |                1 |              3 |         3.00 |
+|  modMillionCounter/r_reg_reg[0]_0_BUFG             |                                                                 | rst_IBUF         |                3 |              4 |         1.33 |
+|  clk_IBUF_BUFG                                     | sseg/d_reg                                                      | rst_IBUF         |                1 |              4 |         4.00 |
+| ~modMillionCounter/r_reg_reg[0]_0_BUFG             | processor/cu/E[0]                                               | rst_IBUF         |                1 |              4 |         4.00 |
+| ~modMillionCounter/r_reg_reg[0]_0_BUFG             | processor/registers/reg_op/reg_reg[1]_6[0]                      | rst_IBUF         |                3 |              8 |         2.67 |
+|  processor/registers/reg_op/reg_reg[0]_8[0]        |                                                                 |                  |                3 |              8 |         2.67 |
+| ~modMillionCounter/r_reg_reg[0]_0_BUFG             | processor/cu/FSM_sequential_state_reg_reg[1]_1[0]               | rst_IBUF         |                4 |              8 |         2.00 |
+| ~modMillionCounter/r_reg_reg[0]_0_BUFG             | processor/registers/reg_op/reg_reg[1]_5[0]                      | rst_IBUF         |                2 |              8 |         4.00 |
+| ~modMillionCounter/r_reg_reg[0]_0_BUFG             | processor/registers/reg_op/FSM_sequential_state_reg_reg[0]_2[0] | rst_IBUF         |                4 |              8 |         2.00 |
+| ~modMillionCounter/r_reg_reg[0]_0_BUFG             | processor/registers/reg_op/FSM_sequential_state_reg_reg[0]_1[0] | rst_IBUF         |                6 |              8 |         1.33 |
+| ~modMillionCounter/r_reg_reg[0]_0_BUFG             | processor/registers/reg_op/FSM_sequential_state_reg_reg[0]_0[0] | rst_IBUF         |                3 |              8 |         2.67 |
+| ~modMillionCounter/r_reg_reg[0]_0_BUFG             | processor/registers/reg_op/FSM_sequential_state_reg_reg[0][0]   | rst_IBUF         |                2 |              8 |         4.00 |
+| ~modMillionCounter/r_reg_reg[0]_0_BUFG             | processor/registers/reg_op/E[0]                                 | rst_IBUF         |                3 |              8 |         2.67 |
+| ~modMillionCounter/r_reg_reg[0]_0_BUFG             | processor/registers/reg_mem/reg_reg[1]_0[0]                     | rst_IBUF         |                6 |             16 |         2.67 |
+| ~modMillionCounter/r_reg_reg[0]_0_BUFG             | processor/cu/cpu_rw                                             |                  |                4 |             16 |         4.00 |
+|  processor/registers/reg_instr_reg/reg_reg[0]_3[0] |                                                                 |                  |                5 |             16 |         3.20 |
+|  clk_IBUF_BUFG                                     | sseg/sel                                                        |                  |                5 |             17 |         3.40 |
+|  clk_IBUF_BUFG                                     |                                                                 | rst_IBUF         |                7 |             27 |         3.86 |
+|  modMillionCounter/r_reg_reg[0]_0_BUFG             | processor/registers/reg_op/reg_reg[2]_2[0]                      | rst_IBUF         |               14 |             32 |         2.29 |
++----------------------------------------------------+-----------------------------------------------------------------+------------------+------------------+----------------+--------------+
+
+

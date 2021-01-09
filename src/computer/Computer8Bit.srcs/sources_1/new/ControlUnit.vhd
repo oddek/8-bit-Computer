@@ -122,7 +122,6 @@ architecture Behavioral of ControlUnit is
 
     signal instruction_stage, instruction_stage_next : integer := 0;
 
-    signal logical_bool : STD_LOGIC;
 
 begin
 
@@ -132,6 +131,7 @@ begin
             --Reset everything
             state_reg <= halt;
             instr_curr <= first_arg;
+            instruction_stage <= 0;
         elsif(falling_edge(clk)) then
             state_reg <= state_next;
             instr_curr <= instr_next;
@@ -141,7 +141,7 @@ begin
 
 
     --Next state logic
-    process(state_reg, instr, instr_curr, instruction_stage, logical_bool)
+    process(state_reg, instr, instr2, instr_curr, instruction_stage, alu_boolean)
     begin
         --Turning everything off by default:
         alu_out <= '0';
@@ -149,6 +149,9 @@ begin
         pc_load <= '0';
         pc_inc <= '0';
         pc_out <= '0';
+        ip_load <= '0';
+        ip_out <= '0';
+        ip_inc <= '0';
         sp_inc <= '0';
         sp_dec <= '0';
         sp_out <= '0';
@@ -159,6 +162,7 @@ begin
         --Dont change current instruction on next cycle, unless explicitly told to do so
         instr_next <= instr_curr;
         state_next <= state_reg;
+        instruction_stage_next <= instruction_stage;
 
         case state_reg is
             when halt =>

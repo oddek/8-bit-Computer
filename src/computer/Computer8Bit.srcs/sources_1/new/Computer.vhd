@@ -34,10 +34,14 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity Computer is
     Port ( clk : in STD_LOGIC;
            rst : in STD_LOGIC;
-           y : out STD_LOGIC);
+           seg : out STD_LOGIC_VECTOR(7 downto 0);
+           an : out STD_LOGIC_VECTOR(3 downto 0);
+           JB : out STD_LOGIC_VECTOR(7 downto 0);
+           lcd_rs, lcd_rw, lcd_en : out STD_LOGIC);
 end Computer;
 
 architecture Behavioral of Computer is
+
 
     --Internal signals
     signal mem_en : STD_LOGIC;
@@ -47,6 +51,13 @@ architecture Behavioral of Computer is
 
     signal romEnable : STD_LOGIC;
     signal ramEnable : STD_LOGIC;
+
+    signal load_io_a, load_io_b : STD_LOGIC;
+    signal lcd_a, lcd_b : STD_LOGIC_VECTOR(7 downto 0);
+
+    signal hexDisp : STD_LOGIC_VECTOR(15 downto 0);
+
+    signal global_clk : STD_LOGIC; 
 
     Component CPU 
         Port ( clk : in STD_LOGIC;
@@ -75,6 +86,40 @@ architecture Behavioral of Computer is
                dataBus :  inout STD_LOGIC_VECTOR (DataSize-1 downto 0));
     end Component;
 
+    Component SixteenBitDisplay
+        Port ( sw : in STD_LOGIC_VECTOR (15 downto 0);
+               clk : in STD_LOGIC;
+               rst : in STD_LOGIC;
+               seg : out STD_LOGIC_VECTOR (7 downto 0);
+               an : out STD_LOGIC_VECTOR(3 downto 0));
+    end Component;
+
+    Component ModMCounter 
+        Generic(N : integer := 7;
+                M : Integer := 100);
+        Port ( clk : in STD_LOGIC;
+               rst : in STD_LOGIC;
+               q : out STD_LOGIC_VECTOR(N-1 downto 0);
+               max_tick : out STD_LOGIC);
+
+    end Component;
+
+
+    Component IO 
+        Port ( clk : in STD_LOGIC;
+               rst : in STD_LOGIC;
+                          en_load : in STD_LOGIC; 
+
+               load_a : in STD_LOGIC;
+               load_b : in STD_LOGIC;
+               dataBus : in STD_LOGIC_VECTOR(7 downto 0);
+               Z_a  : out STD_LOGIC_VECTOR(7 downto 0);
+               Z_b  : out STD_LOGIC_VECTOR(7 downto 0));
+    end Component;
+
+
+
+
 begin
 
     --Rom is enabled when mem_en is high and were in the lower address space
@@ -85,11 +130,31 @@ begin
     ramEnable <= '1' when (mem_en = '1' and addrBus(7) = '1') else
                  '0';
 
+    hexDisp(15 downto 8) <= lcd_b;--addrBus(7 downto 0);
+    hexDisp(7 downto 0) <= dataBus(7 downto 0);
+
+    load_io_a <= '1' when addrBus = "11111111" else
+                 '0';
+
+    load_io_b <= '1' when addrBus = "11111110" else
+                 '0';
+
+    JB <= lcd_b;
+    lcd_rs <= lcd_a(5); 
+    lcd_rw <= lcd_a(6); 
+    lcd_en <= lcd_a(7);
+
+
+
+
+
+
+
 
     processor : CPU
     port map
     (
-        clk => clk,
+        clk => global_clk,
         rst => rst,
         rw => cpu_rw,
         mem_en => mem_en,
@@ -104,16 +169,56 @@ begin
         en => romEnable,
         dataOut => dataBus
     );
+    
+    
 
     writeMem : RAM
     port map
     (
-        clk => clk,
+        clk => global_clk,
         load => cpu_rw,
         en => ramEnable,
         addr => addrBus(6 downto 0),
         dataBus => dataBus
     );
+    
 
+    sseg: SixteenBitDisplay
+    port map
+    (
+        sw => hexDisp,
+        clk => clk,
+        rst => rst,
+        seg => seg,
+        an => an
+    );
+
+    modMillionCounter : ModMCounter
+    generic map
+    (
+        N => 27,
+        M => 1000000
+    )
+    port map
+    (
+        clk => clk,
+        rst => rst,
+        q => open,
+        max_tick => global_clk
+    );
+    --global_clk <= clk;
+
+    io_reg : IO
+    port map
+    (
+        clk => global_clk,
+        rst => rst,
+        en_load => cpu_rw,
+        load_a => load_io_a,
+        load_b => load_io_b,
+        dataBus => dataBus,
+        Z_a => lcd_a,
+        Z_b => lcd_b
+    );
 
 end Behavioral;

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="Computer_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="Computer_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="1500fs"></ZoomStartTime>
+      <ZoomEndTime time="2930fs"></ZoomEndTime>
+      <Cursor1Time time="1000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="144"></NameColumnWidth>
+      <ValueColumnWidth column_width="66"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="22" />
+   <wvobject type="logic" fp_name="/Computer_tb/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/rst">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/seg">
+      <obj_property name="ElementShortName">seg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">seg[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/an">
+      <obj_property name="ElementShortName">an[3:0]</obj_property>
+      <obj_property name="ObjectShortName">an[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/JB">
+      <obj_property name="ElementShortName">JB[7:0]</obj_property>
+      <obj_property name="ObjectShortName">JB[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/lcd_rs">
+      <obj_property name="ElementShortName">lcd_rs</obj_property>
+      <obj_property name="ObjectShortName">lcd_rs</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/lcd_rw">
+      <obj_property name="ElementShortName">lcd_rw</obj_property>
+      <obj_property name="ObjectShortName">lcd_rw</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/lcd_en">
+      <obj_property name="ElementShortName">lcd_en</obj_property>
+      <obj_property name="ObjectShortName">lcd_en</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/Computer_tb/clk_period">
+      <obj_property name="ElementShortName">clk_period</obj_property>
+      <obj_property name="ObjectShortName">clk_period</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/dataBus">
+      <obj_property name="ElementShortName">dataBus[7:0]</obj_property>
+      <obj_property name="ObjectShortName">dataBus[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/addrBus">
+      <obj_property name="ElementShortName">addrBus[7:0]</obj_property>
+      <obj_property name="ObjectShortName">addrBus[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/Computer_tb/UUT/processor/cu/state_reg">
+      <obj_property name="ElementShortName">state_reg</obj_property>
+      <obj_property name="ObjectShortName">state_reg</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/processor/cu/instr">
+      <obj_property name="ElementShortName">instr[7:0]</obj_property>
+      <obj_property name="ObjectShortName">instr[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/processor/cu/instr2">
+      <obj_property name="ElementShortName">instr2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">instr2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/processor/registers/reg_x/reg">
+      <obj_property name="ElementShortName">reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/UUT/io_reg/load_a">
+      <obj_property name="ElementShortName">load_a</obj_property>
+      <obj_property name="ObjectShortName">load_a</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/UUT/io_reg/load_b">
+      <obj_property name="ElementShortName">load_b</obj_property>
+      <obj_property name="ObjectShortName">load_b</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/io_reg/reg_a">
+      <obj_property name="ElementShortName">reg_a[7:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_a[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/io_reg/reg_b">
+      <obj_property name="ElementShortName">reg_b[7:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_b[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/io_reg/Z_a">
+      <obj_property name="ElementShortName">Z_a[7:0]</obj_property>
+      <obj_property name="ObjectShortName">Z_a[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/io_reg/Z_b">
+      <obj_property name="ElementShortName">Z_b[7:0]</obj_property>
+      <obj_property name="ObjectShortName">Z_b[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/processor/pc/r_reg">
+      <obj_property name="ElementShortName">r_reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">r_reg[7:0]</obj_property>
+   </wvobject>
+</wave_config>

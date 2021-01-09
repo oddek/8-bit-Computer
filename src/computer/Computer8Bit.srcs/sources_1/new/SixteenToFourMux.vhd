@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 12/18/2020 11:14:44 AM
+-- Create Date: 01/09/2021 12:07:12 PM
 -- Design Name: 
--- Module Name: InstructionDecoder - Behavioral
+-- Module Name: SixteenToFourMux - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,17 +31,19 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity InstructionDecoder is
-    Port ( clk : in STD_LOGIC;
-           input : in STD_LOGIC_VECTOR (7 downto 0);
-           output : out STD_LOGIC_VECTOR (23 downto 0));
-end InstructionDecoder;
+entity SixteenToFourMux is
+    Port ( x : in STD_LOGIC_VECTOR (15 downto 0);
+           sel : in STD_LOGIC_VECTOR (1 downto 0);
+           y : out STD_LOGIC_VECTOR (3 downto 0));
+end SixteenToFourMux;
 
-architecture Behavioral of InstructionDecoder is
-
-     
+architecture Behavioral of SixteenToFourMux is
 
 begin
 
+    y <= x(3 downto 0) when sel = "00" else
+         x(7 downto 4) when sel = "01" else
+         x(11 downto 8) when sel = "10" else
+         x(15 downto 12);
 
 end Behavioral;

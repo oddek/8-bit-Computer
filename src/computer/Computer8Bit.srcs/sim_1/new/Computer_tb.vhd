@@ -32,18 +32,25 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity Computer_tb is
---  Port ( );
+	--  Port ( );
 	end Computer_tb;
 
 architecture Behavioral of Computer_tb is
 
-	signal clk, rst, y : STD_LOGIC;
+	signal clk, rst : STD_LOGIC;
 	constant clk_period : time := 10 ps;
+	signal seg : STD_LOGIC_VECTOR(7 downto 0);
+	signal an : STD_LOGIC_VECTOR(3 downto 0);
+	signal JB : STD_LOGIC_VECTOR(7 downto 0);
+	signal lcd_rs, lcd_rw, lcd_en : STD_LOGIC;
 
 	Component Computer 
 		Port ( clk : in STD_LOGIC;
 			   rst : in STD_LOGIC;
-			   y : out STD_LOGIC);
+			   seg : out STD_LOGIC_VECTOR(7 downto 0);
+			   an : out STD_LOGIC_VECTOR(3 downto 0);
+			   JB : out STD_LOGIC_VECTOR(7 downto 0);
+		lcd_rs, lcd_rw, lcd_en : out STD_LOGIC);
 	end Component;
 
 begin
@@ -52,7 +59,12 @@ begin
 	(
 		clk => clk,
 		rst => rst,
-		y => y
+		seg => seg,
+		an => an,
+		JB => JB,
+		lcd_rs => lcd_rs,
+		lcd_rw => lcd_rw,
+		lcd_en => lcd_en
 	);
 
 

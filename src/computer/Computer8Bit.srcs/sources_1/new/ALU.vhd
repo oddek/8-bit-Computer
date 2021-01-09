@@ -79,8 +79,9 @@ begin
     x_unsigned <= unsigned(x);
     y_unsigned <= unsigned(y);
 
-    process(opcode, x, y)
+    process(opcode, x, y, x_signed, y_signed, x_unsigned, y_unsigned, mul_temp)
     begin
+        
         case opcode is
             --Noop
             when "00000" =>

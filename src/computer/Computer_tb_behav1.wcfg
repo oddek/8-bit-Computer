@@ -10,15 +10,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="1251fs"></ZoomStartTime>
-      <ZoomEndTime time="1313fs"></ZoomEndTime>
-      <Cursor1Time time="999701fs"></Cursor1Time>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="15fs"></ZoomEndTime>
+      <Cursor1Time time="1000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="168"></NameColumnWidth>
+      <NameColumnWidth column_width="156"></NameColumnWidth>
       <ValueColumnWidth column_width="66"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="28" />
+   <WVObjectSize size="31" />
    <wave_markers>
       <marker label="" time="630" />
       <marker label="" time="1000000" />
@@ -32,10 +32,6 @@
    <wvobject type="logic" fp_name="/Computer_tb/rst">
       <obj_property name="ElementShortName">rst</obj_property>
       <obj_property name="ObjectShortName">rst</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/Computer_tb/y">
-      <obj_property name="ElementShortName">y</obj_property>
-      <obj_property name="ObjectShortName">y</obj_property>
    </wvobject>
    <wvobject type="other" fp_name="/Computer_tb/clk_period">
       <obj_property name="ElementShortName">clk_period</obj_property>
@@ -138,5 +134,22 @@
    <wvobject type="array" fp_name="/Computer_tb/UUT/processor/cu/instr2">
       <obj_property name="ElementShortName">instr2[7:0]</obj_property>
       <obj_property name="ObjectShortName">instr2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/Computer_tb/UUT/modMillionCounter/max_tick">
+      <obj_property name="ElementShortName">max_tick</obj_property>
+      <obj_property name="ObjectShortName">max_tick</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/sseg/sw">
+      <obj_property name="ElementShortName">sw[15:0]</obj_property>
+      <obj_property name="ObjectShortName">sw[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/sseg/an">
+      <obj_property name="ElementShortName">an[3:0]</obj_property>
+      <obj_property name="ObjectShortName">an[3:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/Computer_tb/UUT/sseg/seg">
+      <obj_property name="ElementShortName">seg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">seg[7:0]</obj_property>
    </wvobject>
 </wave_config>
