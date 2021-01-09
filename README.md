@@ -129,10 +129,55 @@ DIVQ returns the quotient of the division, while DIVR returns the remainder of t
 
 Instructions 14 - 20 are bitshift instructions. 
 
-##### Instruction Set/Control Unit
+##### Instruction Set Architecture/Control Unit
+
+As mentioned previously much of the design is inspired by 6502 and MIPS and the ISA is no exception. 
+
+For simplicity I wanted fixed-length instructions. However, as the bus is only 8 bits wide, I did not want to spend too many cycles fetching instructions with no content. Still, I wanted a fair amount of instructions, so 2 byte instructions, seemed optimal in this case. How they are formatted can be seen in the table below:
 
 ```
-INSERT INSTRUCTION SET HERE
+| opcode | regArg | Addr/const/regArg |
+|--------|--------|-------------------|
+| 00000  | 000    | 00000000          |
+```
+
+The instruction set can be seen in the table below:
+
+```
+| Hex Val | opcode | regArg    | Addr/const/reg-arg | Description                                                            |
+|---------|--------|-----------|--------------------|------------------------------------------------------------------------|
+| 0       | nop    | N/A       | N/A                | No operation                                                           |
+| 1       | ldw    | destReg   | address            | Loads word at address into dest reg                                    |
+| 2       | ldi    | destReg   | constant           | Loads constant into dest reg                                           |
+| 3       | stw    | sourceReg | address            | Stores word in source reg to address                                   |
+| 4       | add    | destReg   | N/A                | Adds X and Y reg, stores to dest reg, interprets as 2’s Complement     |
+| 5       | addu   | destReg   | N/A                | Adds X and Y reg, stores to dest reg, interprets as unsigned           |
+| 6       | sub    | destReg   | N/A                | X – Y, stores in dest reg, interprets as  unsigned                     |
+| 7       | subu   | destReg   | N/A                | X – Y, stores in dest reg, interprets as 2’s Complement                |
+| 8       | jmp    | N/A       | address            | loads PC with addressargument. Increments stackpointer with current pc |
+| 9       | ret    | N/A       | N/A                | decrement stackpointer, load ret address into program counter          |
+| A       | beq    | N/A       | address            | X = Y? Load PC with address                                            |
+| B       | bne    | N/A       | address            | X != Y? Load PC with address                                           |
+| C       | bgt    | N/A       | address            | X > Y? Load PC with address                                            |
+| D       | bge    | N/A       | address            | X >= Y? Load PC with address                                           |
+| E       | mov    | destreg   | sourceReg          | move  src reg → dest reg                                               |
+| F       | psh    | sourceReg | N/A                | Push  src reg onto stack                                               |
+| 10      | pul    | destReg   | N/A                | Pull word off stack, place in dest reg                                 |
+| 11      | and    | destReg   | N/A                | X AND Y,  stores in dest reg                                           |
+| 12      | or     | destReg   | N/A                | X OR Y,  stores in destReg                                             |
+| 13      | not    | destReg   | N/A                | NOT operator,  source = destReg, X or Y  reg possible                  |
+| 14      | xor    | destReg   | N/A                | X XOR Y,  stores in dest reg                                           |
+| 15      | xnor   | destReg   | N/A                | X XNOR Y,  stores in dest reg                                          |
+| 16      | sll    | desReg    | N/A                | <<, src = dest (X or Y)                                                |
+| 17      | srl    | desReg    | N/A                | >>, src = dest (X or Y)                                                |
+| 18      | mul    | N/A       | N/A                | X*Y, upper 8 bits → HI, lower 8 bits → LO                              |
+| 19      | div    | N/A       | N/A                | X/Y, quotient → HI, remainder → LO                                     |
+| 1A      | inl    | N/A       | constant           | Load index register with constant                                      |
+| 1B      | ini    | N/A       | constant           | Increment index register by constant                                   |
+| 1C      | -      | --        | --                 | --                                                                     |
+| 1D      | --     | --        | --                 | --                                                                     |
+| 1E      | --     | --        | --                 | --                                                                     |
+| 1F      | --     | --        | --                 | --                                                                     |
 ```
 
 ## Assembler
