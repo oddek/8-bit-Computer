@@ -72,6 +72,7 @@ proc create_report { reportName command } {
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param chipscope.maxJobs 2
 set_param xicom.use_bs_reader 1
+set_param synth.incrementalSynthesisCache ./.Xil/Vivado-13915-kent-ThinkPad-T580/incrSyn
 set_msg_config -id {Synth 8-256} -limit 10000
 set_msg_config -id {Synth 8-638} -limit 10000
 OPTRACE "Creating in-memory project" START { }
@@ -105,7 +106,6 @@ read_vhdl -library xil_defaultlib {
   /home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/SixteenToFourMux.vhd
   /home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/StackPointer.vhd
   /home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/Computer.vhd
-  /home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/InstructionFetch.vhd
   /home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/IO.vhd
 }
 OPTRACE "Adding files" END { }

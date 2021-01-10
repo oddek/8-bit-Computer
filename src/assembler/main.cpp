@@ -627,7 +627,7 @@ int main(int argc, char* argv[])
 
 	/* printVec(lines); */
 	auto wordVector = parseWords(lines);
-	/* printVec(wordVector); */
+	printVec(wordVector);
 	auto tt = buildTokens(wordVector);
 	printVec(tt);
 

@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2020.2 (lin64) Build 3064766 Wed Nov 18 09:12:47 MST 2020
-| Date             : Sat Jan  9 19:42:03 2021
+| Date             : Sun Jan 10 14:14:29 2021
 | Host             : kent-ThinkPad-T580 running 64-bit Ubuntu 20.04.1 LTS
 | Command          : report_power -file Computer_power_routed.rpt -pb Computer_power_summary_routed.pb -rpx Computer_power_routed.rpx
 | Design           : Computer
@@ -33,7 +33,7 @@ Table of Contents
 | Total On-Chip Power (W)  | 0.075        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.003        |
+| Dynamic (W)              | 0.004        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 5.0          |
 | Max Ambient (C)          | 84.6         |
@@ -53,15 +53,15 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |    <0.001 |        3 |       --- |             --- |
-| Slice Logic              |    <0.001 |      806 |       --- |             --- |
-|   LUT as Logic           |    <0.001 |      421 |     20800 |            2.02 |
-|   CARRY4                 |    <0.001 |       39 |      8150 |            0.48 |
-|   Register               |    <0.001 |      196 |     41600 |            0.47 |
+| Slice Logic              |    <0.001 |      802 |       --- |             --- |
+|   LUT as Logic           |    <0.001 |      422 |     20800 |            2.03 |
+|   CARRY4                 |    <0.001 |       37 |      8150 |            0.45 |
+|   Register               |    <0.001 |      188 |     41600 |            0.45 |
 |   LUT as Distributed RAM |    <0.001 |       16 |      9600 |            0.17 |
 |   F7/F8 Muxes            |    <0.001 |       16 |     32600 |            0.05 |
 |   BUFG                   |    <0.001 |        1 |        32 |            3.13 |
 |   Others                 |     0.000 |       13 |       --- |             --- |
-| Signals                  |    <0.001 |      693 |       --- |             --- |
+| Signals                  |    <0.001 |      687 |       --- |             --- |
 | I/O                      |     0.001 |       25 |       106 |           23.58 |
 | Static Power             |     0.072 |          |           |                 |
 | Total                    |     0.075 |          |           |                 |
@@ -143,7 +143,7 @@ Table of Contents
 +-------------+-----------+
 | Name        | Power (W) |
 +-------------+-----------+
-| Computer    |     0.003 |
+| Computer    |     0.004 |
 |   processor |     0.001 |
 +-------------+-----------+
 

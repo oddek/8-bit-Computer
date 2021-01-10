@@ -1,6 +1,9 @@
 <!-- https://thisdavej.com/copy-table-in-excel-and-paste-as-a-markdown-table/ -->
-
+src/computer/Computer8Bit.srcs/sources_1/new/
 # 8 Bit Computer 
+
+![](img/hiWorld.gif)
+![](img/hiWorld.jpeg =250)
 
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
@@ -18,7 +21,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project consists of an 8 bit computer simulated in VHDL, as well as an assembler written in C++. My goal was to get an incresed understanding of computer architecture and VHDL. 
+This project consists of an 8 bit computer simulated in VHDL, as well as an assembler written in C++. My goal was to get an incresed understanding of computer architecture and VHDL during the christmas vacation of 2020. 
 
 The main inspiration for this project came from [Ben Eater](https://eater.net/), who on his youtube channel has done detailed implementations of an 8-bit computer and a 6502 computer, on breadboards. My computer ended up being quite different, as it is of course a lot easier to implement a large project in VHDL than on breadboards. However, his excellent explanations gave me the understanding necessary to even attempt a project like this. 
 
@@ -28,6 +31,8 @@ The assembler is just a tool for being to able write instructions for the comput
 
 
 ## Computer
+[Source Code](src/computer/Computer8Bit.srcs/sources_1/new/Computer.vhd)
+
 The computer consists of the following modules:
 
 * CPU
@@ -36,8 +41,13 @@ The computer consists of the following modules:
 * IO
 
 and the top level structure can be seen in the figure below:
-INSERT TOP LEVEL FIGURE
+![Top level schematic](img/topLevelSchematic.png)
 
+For now, the IO only handles output, and is pretty much hardcoded to work with an HD44780 LCD display. The seven segment display is embedded on the Basys3, and shows the current contents on the address and data bus. 
+
+The modMillionCounter is there to provide a reduced clock speed, as the Basys3 clock runs at 100MHz
+
+When generating the bitstream, the ROM will be filled with the currently selected program, and the program counter wil start reading at address 0.
 
 For simplicity, the data bus and address bus are 8 bits wide. RAM, ROM and IO are all accessed via the same buses, and the address scheme can be seen in the table below:
 
@@ -171,7 +181,7 @@ The instruction set can be seen in the table below:
 | 16      | sll    | desReg    | N/A                | <<, src = dest (X or Y)                                                |
 | 17      | srl    | desReg    | N/A                | >>, src = dest (X or Y)                                                |
 | 18      | mul    | N/A       | N/A                | X*Y, upper 8 bits → HI, lower 8 bits → LO                              |
-| 19      | div    | N/A       | N/A                | X/Y, quotient → HI, remainder → LO                                     |
+| 19      | div    | N/A       | N/A                | X/Y, quotient → HI, remainder → LO, not yet implemented.               |
 | 1A      | inl    | N/A       | constant           | Load index register with constant                                      |
 | 1B      | ini    | N/A       | constant           | Increment index register by constant                                   |
 | 1C      | -      | --        | --                 | --                                                                     |
@@ -179,6 +189,11 @@ The instruction set can be seen in the table below:
 | 1E      | --     | --        | --                 | --                                                                     |
 | 1F      | --     | --        | --                 | --                                                                     |
 ```
+
+The ISA is implemented in the control unit using a finite state machine. Some of the instructions take a single cycle, while others may take up to 3 cycles to execute. 
+
+At first I envisioned the control unit to be modular, easy to change, and perhaps with pipelined execution. However, because of the limited time I had, everything had to be kind of thrown together and made to work. In other words, the control unit is in great need of improvement. 
+
 
 ## Assembler
 
@@ -220,7 +235,11 @@ char:
 	.word 'L' ; place literal char L at this address
 ```
 
-From this, the assembler will generate the following machine code
+To assemble this, we run the command:
+```
+./assembler "prog.asm" "128"
+
+From this, the assembler will generate the following machine code (with a newline after each byte).
 ```bin
 00000000 00000000
 00001011 00011110
@@ -244,10 +263,16 @@ From this, the assembler will generate the following machine code
 00000000 00000000
 ```
 
+## Example Programs
 	
+* [Hi, World](examples/hiWorld.asm)
+* [Simple Add](examples/add.asm)
+* [Noe annet]
+
 <!-- USAGE -->
 ## Usage
 
+The computer has been tested on a [Basys 3 Artix-7 FPGA](https://store.digilentinc.com/basys-3-artix-7-fpga-trainer-board-recommended-for-introductory-users/), and synthesized in [Xilinx Vivado 2020.2](https://www.xilinx.com/).
 
 <!-- LICENSE -->
 ## License

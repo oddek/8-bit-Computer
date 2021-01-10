@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.2 (lin64) Build 3064766 Wed Nov 18 09:12:47 MST 2020
-| Date         : Sat Jan  9 19:42:01 2021
+| Date         : Sun Jan 10 14:14:28 2021
 | Host         : kent-ThinkPad-T580 running 64-bit Ubuntu 20.04.1 LTS
 | Command      : report_drc -file Computer_drc_routed.rpt -pb Computer_drc_routed.pb -rpx Computer_drc_routed.rpx
 | Design       : Computer
@@ -49,17 +49,17 @@ Related violations: <none>
 
 PDRC-153#1 Warning
 Gated clock check  
-Net processor/registers/reg_instr_reg/reg_reg[0]_3[0] is a gated clock net sourced by a combinational pin processor/registers/reg_instr_reg/mul_temp_reg[15]_i_1/O, cell processor/registers/reg_instr_reg/mul_temp_reg[15]_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net processor/registers/reg_op/reg_reg[0]_1[0] is a gated clock net sourced by a combinational pin processor/registers/reg_op/mul_temp_reg[15]_i_1/O, cell processor/registers/reg_op/mul_temp_reg[15]_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#2 Warning
 Gated clock check  
-Net processor/registers/reg_op/reg_reg[0]_8[0] is a gated clock net sourced by a combinational pin processor/registers/reg_op/temp_reg[7]_i_2/O, cell processor/registers/reg_op/temp_reg[7]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net processor/registers/reg_op/reg_reg[3]_4 is a gated clock net sourced by a combinational pin processor/registers/reg_op/logical_bool_reg_i_2/O, cell processor/registers/reg_op/logical_bool_reg_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#3 Warning
 Gated clock check  
-Net processor/registers/reg_op/reg_reg[0]_9 is a gated clock net sourced by a combinational pin processor/registers/reg_op/logical_bool_reg_i_2/O, cell processor/registers/reg_op/logical_bool_reg_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net processor/registers/reg_op/reg_reg[3]_5[0] is a gated clock net sourced by a combinational pin processor/registers/reg_op/temp_reg[7]_i_2/O, cell processor/registers/reg_op/temp_reg[7]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 

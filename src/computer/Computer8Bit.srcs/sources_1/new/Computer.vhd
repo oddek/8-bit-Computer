@@ -19,6 +19,9 @@
 ----------------------------------------------------------------------------------
 
 
+
+
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
@@ -41,6 +44,7 @@ entity Computer is
 end Computer;
 
 architecture Behavioral of Computer is
+
 
 
     --Internal signals
@@ -130,24 +134,19 @@ begin
     ramEnable <= '1' when (mem_en = '1' and addrBus(7) = '1') else
                  '0';
 
-    hexDisp(15 downto 8) <= lcd_b;--addrBus(7 downto 0);
+    --Display address bus and data bus on seven segment display
+    hexDisp(15 downto 8) <= addrBus(7 downto 0);
     hexDisp(7 downto 0) <= dataBus(7 downto 0);
 
+    --Io is currently setup to only work as output, to interface with an lcd display:
     load_io_a <= '1' when addrBus = "11111111" else
                  '0';
-
     load_io_b <= '1' when addrBus = "11111110" else
                  '0';
-
     JB <= lcd_b;
     lcd_rs <= lcd_a(5); 
     lcd_rw <= lcd_a(6); 
     lcd_en <= lcd_a(7);
-
-
-
-
-
 
 
 
@@ -182,6 +181,7 @@ begin
         dataBus => dataBus
     );
     
+    
 
     sseg: SixteenBitDisplay
     port map
@@ -192,6 +192,7 @@ begin
         seg => seg,
         an => an
     );
+
 
     modMillionCounter : ModMCounter
     generic map
@@ -204,9 +205,12 @@ begin
         clk => clk,
         rst => rst,
         q => open,
-        max_tick => global_clk
+        max_tick => global_clk --set as open for simulation
     );
+    --Uncomment for simulation
     --global_clk <= clk;
+    
+    
 
     io_reg : IO
     port map

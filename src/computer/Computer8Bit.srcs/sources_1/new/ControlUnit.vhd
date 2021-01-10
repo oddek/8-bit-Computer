@@ -196,6 +196,7 @@ begin
                         state_next <= instr_decode;
                     when others =>
 
+
                 end case;
             when instr_decode =>
                 --Enable instruction decode component

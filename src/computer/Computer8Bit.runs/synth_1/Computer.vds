@@ -2,8 +2,8 @@
 # Vivado v2020.2 (64-bit)
 # SW Build 3064766 on Wed Nov 18 09:12:47 MST 2020
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
-# Start of session at: Sat Jan  9 19:40:32 2021
-# Process ID: 182740
+# Start of session at: Sun Jan 10 14:12:58 2021
+# Process ID: 63171
 # Current directory: /home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.runs/synth_1
 # Command line: vivado -log Computer.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source Computer.tcl
 # Log file: /home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.runs/synth_1/Computer.vds
@@ -17,12 +17,12 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t
 INFO: [Device 21-403] Loading part xc7a35tcpg236-1
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 182790
+INFO: [Synth 8-7075] Helper process launched with PID 63203
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 2306.113 ; gain = 0.000 ; free physical = 291 ; free virtual = 71068
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2306.113 ; gain = 0.000 ; free physical = 200 ; free virtual = 71459
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-638] synthesizing module 'Computer' [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/Computer.vhd:43]
-INFO: [Synth 8-3491] module 'CPU' declared at '/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/CPU.vhd:26' bound to instance 'processor' of component 'CPU' [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/Computer.vhd:154]
+INFO: [Synth 8-638] synthesizing module 'Computer' [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/Computer.vhd:46]
+INFO: [Synth 8-3491] module 'CPU' declared at '/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/CPU.vhd:26' bound to instance 'processor' of component 'CPU' [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/Computer.vhd:153]
 INFO: [Synth 8-638] synthesizing module 'CPU' [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/CPU.vhd:35]
 INFO: [Synth 8-3491] module 'ControlUnit' declared at '/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/ControlUnit.vhd:26' bound to instance 'cu' of component 'ControlUnit' [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/CPU.vhd:146]
 INFO: [Synth 8-638] synthesizing module 'ControlUnit' [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/ControlUnit.vhd:49]
@@ -91,14 +91,14 @@ INFO: [Synth 8-256] done synthesizing module 'ALU' (7#1) [/home/kent/source/vhdl
 INFO: [Synth 8-256] done synthesizing module 'CPU' (8#1) [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/CPU.vhd:35]
 	Parameter AddrSize bound to: 7 - type: integer 
 	Parameter DataSize bound to: 8 - type: integer 
-INFO: [Synth 8-3491] module 'ROM' declared at '/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/ROM.vhd:29' bound to instance 'readOnlyMem' of component 'ROM' [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/Computer.vhd:165]
+INFO: [Synth 8-3491] module 'ROM' declared at '/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/ROM.vhd:29' bound to instance 'readOnlyMem' of component 'ROM' [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/Computer.vhd:164]
 INFO: [Synth 8-638] synthesizing module 'ROM' [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/ROM.vhd:37]
 	Parameter AddrSize bound to: 7 - type: integer 
 	Parameter DataSize bound to: 8 - type: integer 
 INFO: [Synth 8-256] done synthesizing module 'ROM' (9#1) [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/ROM.vhd:37]
 	Parameter AddrSize bound to: 7 - type: integer 
 	Parameter DataSize bound to: 8 - type: integer 
-INFO: [Synth 8-3491] module 'RAM' declared at '/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/RAM.vhd:34' bound to instance 'writeMem' of component 'RAM' [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/Computer.vhd:175]
+INFO: [Synth 8-3491] module 'RAM' declared at '/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/RAM.vhd:34' bound to instance 'writeMem' of component 'RAM' [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/Computer.vhd:174]
 INFO: [Synth 8-638] synthesizing module 'RAM' [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/RAM.vhd:44]
 	Parameter AddrSize bound to: 7 - type: integer 
 	Parameter DataSize bound to: 8 - type: integer 
@@ -114,28 +114,28 @@ INFO: [Synth 8-256] done synthesizing module 'HexToSseg' (12#1) [/home/kent/sour
 INFO: [Synth 8-256] done synthesizing module 'SixteenBitDisplay' (13#1) [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/SixteenBitDisplay.vhd:42]
 	Parameter N bound to: 27 - type: integer 
 	Parameter M bound to: 1000000 - type: integer 
-INFO: [Synth 8-3491] module 'ModMCounter' declared at '/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/ModMCounter.vhd:33' bound to instance 'modMillionCounter' of component 'ModMCounter' [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/Computer.vhd:196]
+INFO: [Synth 8-3491] module 'ModMCounter' declared at '/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/ModMCounter.vhd:33' bound to instance 'modMillionCounter' of component 'ModMCounter' [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/Computer.vhd:197]
 INFO: [Synth 8-638] synthesizing module 'ModMCounter' [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/ModMCounter.vhd:43]
 	Parameter N bound to: 27 - type: integer 
 	Parameter M bound to: 1000000 - type: integer 
 INFO: [Synth 8-256] done synthesizing module 'ModMCounter' (14#1) [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/ModMCounter.vhd:43]
-INFO: [Synth 8-3491] module 'IO' declared at '/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/IO.vhd:34' bound to instance 'io_reg' of component 'IO' [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/Computer.vhd:211]
+INFO: [Synth 8-3491] module 'IO' declared at '/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/IO.vhd:34' bound to instance 'io_reg' of component 'IO' [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/Computer.vhd:215]
 INFO: [Synth 8-638] synthesizing module 'IO' [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/IO.vhd:45]
 INFO: [Synth 8-256] done synthesizing module 'IO' (15#1) [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/IO.vhd:45]
-INFO: [Synth 8-256] done synthesizing module 'Computer' (16#1) [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/Computer.vhd:43]
+INFO: [Synth 8-256] done synthesizing module 'Computer' (16#1) [/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.srcs/sources_1/new/Computer.vhd:46]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2306.113 ; gain = 0.000 ; free physical = 1012 ; free virtual = 71789
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2306.113 ; gain = 0.000 ; free physical = 952 ; free virtual = 72179
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2306.113 ; gain = 0.000 ; free physical = 1072 ; free virtual = 71849
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2306.113 ; gain = 0.000 ; free physical = 1013 ; free virtual = 72239
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2306.113 ; gain = 0.000 ; free physical = 1072 ; free virtual = 71849
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2306.113 ; gain = 0.000 ; free physical = 1013 ; free virtual = 72239
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2306.113 ; gain = 0.000 ; free physical = 1065 ; free virtual = 71842
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2306.113 ; gain = 0.000 ; free physical = 1006 ; free virtual = 72233
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
@@ -146,26 +146,26 @@ INFO: [Project 1-236] Implementation specific constraints were found while readi
 Resolution: To avoid this warning, move constraints listed in [.Xil/Computer_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2370.055 ; gain = 0.000 ; free physical = 975 ; free virtual = 71752
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2370.055 ; gain = 0.000 ; free physical = 917 ; free virtual = 72144
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2370.055 ; gain = 0.000 ; free physical = 975 ; free virtual = 71752
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2370.055 ; gain = 0.000 ; free physical = 917 ; free virtual = 72144
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:10 ; elapsed = 00:00:12 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 1045 ; free virtual = 71822
+Finished Constraint Validation : Time (s): cpu = 00:00:10 ; elapsed = 00:00:12 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 986 ; free virtual = 72213
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:10 ; elapsed = 00:00:12 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 1045 ; free virtual = 71822
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:10 ; elapsed = 00:00:12 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 986 ; free virtual = 72213
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:10 ; elapsed = 00:00:12 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 1045 ; free virtual = 71822
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 986 ; free virtual = 72213
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg_reg' in module 'ControlUnit'
 INFO: [Synth 8-802] inferred FSM for state register 'd_reg_reg' in module 'SixteenBitDisplay'
@@ -192,7 +192,7 @@ WARNING: [Synth 8-327] inferring latch for variable 'mul_temp_reg' [/home/kent/s
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'd_reg_reg' using encoding 'one-hot' in module 'SixteenBitDisplay'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 1034 ; free virtual = 71812
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 977 ; free virtual = 72205
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -256,7 +256,7 @@ Finished Part Resource Summary
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:16 ; elapsed = 00:00:18 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 1011 ; free virtual = 71793
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:16 ; elapsed = 00:00:18 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 953 ; free virtual = 72184
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -286,13 +286,13 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 927 ; free virtual = 71709
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 854 ; free virtual = 72085
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 926 ; free virtual = 71708
+Finished Timing Optimization : Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 853 ; free virtual = 72084
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -312,7 +312,7 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:21 ; elapsed = 00:00:24 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 924 ; free virtual = 71706
+Finished Technology Mapping : Time (s): cpu = 00:00:22 ; elapsed = 00:00:24 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 851 ; free virtual = 72083
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -330,37 +330,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:24 ; elapsed = 00:00:26 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 925 ; free virtual = 71707
+Finished IO Insertion : Time (s): cpu = 00:00:24 ; elapsed = 00:00:26 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 839 ; free virtual = 72084
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:24 ; elapsed = 00:00:26 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 925 ; free virtual = 71707
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:24 ; elapsed = 00:00:26 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 839 ; free virtual = 72084
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:24 ; elapsed = 00:00:26 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 925 ; free virtual = 71707
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:24 ; elapsed = 00:00:26 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 839 ; free virtual = 72084
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:24 ; elapsed = 00:00:26 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 925 ; free virtual = 71707
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:24 ; elapsed = 00:00:26 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 839 ; free virtual = 72084
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:24 ; elapsed = 00:00:26 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 925 ; free virtual = 71707
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:24 ; elapsed = 00:00:26 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 839 ; free virtual = 72084
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:24 ; elapsed = 00:00:26 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 925 ; free virtual = 71707
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:24 ; elapsed = 00:00:26 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 839 ; free virtual = 72084
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -377,13 +377,13 @@ Report Cell Usage:
 |      |Cell      |Count |
 +------+----------+------+
 |1     |BUFG      |     1|
-|2     |CARRY4    |    39|
-|3     |LUT1      |     6|
-|4     |LUT2      |    82|
-|5     |LUT3      |    39|
-|6     |LUT4      |   105|
-|7     |LUT5      |    66|
-|8     |LUT6      |   245|
+|2     |CARRY4    |    37|
+|3     |LUT1      |     5|
+|4     |LUT2      |    80|
+|5     |LUT3      |    48|
+|6     |LUT4      |   103|
+|7     |LUT5      |    64|
+|8     |LUT6      |   248|
 |9     |MUXF7     |     8|
 |10    |RAM128X1S |     8|
 |11    |FDCE      |   153|
@@ -394,18 +394,18 @@ Report Cell Usage:
 |16    |OBUF      |    23|
 +------+----------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:24 ; elapsed = 00:00:26 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 925 ; free virtual = 71707
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:24 ; elapsed = 00:00:26 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 839 ; free virtual = 72084
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 3 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:22 ; elapsed = 00:00:24 . Memory (MB): peak = 2370.055 ; gain = 0.000 ; free physical = 977 ; free virtual = 71759
-Synthesis Optimization Complete : Time (s): cpu = 00:00:24 ; elapsed = 00:00:26 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 977 ; free virtual = 71759
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:23 ; elapsed = 00:00:25 . Memory (MB): peak = 2370.055 ; gain = 0.000 ; free physical = 892 ; free virtual = 72137
+Synthesis Optimization Complete : Time (s): cpu = 00:00:24 ; elapsed = 00:00:27 . Memory (MB): peak = 2370.055 ; gain = 63.941 ; free physical = 892 ; free virtual = 72137
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2370.055 ; gain = 0.000 ; free physical = 1064 ; free virtual = 71846
-INFO: [Netlist 29-17] Analyzing 80 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2370.055 ; gain = 0.000 ; free physical = 977 ; free virtual = 72222
+INFO: [Netlist 29-17] Analyzing 78 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 1 inverter(s) to 8 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2370.055 ; gain = 0.000 ; free physical = 1011 ; free virtual = 71793
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2370.055 ; gain = 0.000 ; free physical = 924 ; free virtual = 72168
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 33 instances were transformed.
   LD => LDCE: 25 instances
@@ -414,7 +414,7 @@ INFO: [Project 1-111] Unisim Transformation Summary:
 INFO: [Common 17-83] Releasing license: Synthesis
 78 Infos, 3 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:33 ; elapsed = 00:00:30 . Memory (MB): peak = 2370.055 ; gain = 64.031 ; free physical = 1151 ; free virtual = 71933
+synth_design: Time (s): cpu = 00:00:33 ; elapsed = 00:00:31 . Memory (MB): peak = 2370.055 ; gain = 64.031 ; free physical = 1064 ; free virtual = 72308
 INFO: [Common 17-1381] The checkpoint '/home/kent/source/vhdl/Computer8Bit/src/computer/Computer8Bit.runs/synth_1/Computer.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file Computer_utilization_synth.rpt -pb Computer_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Sat Jan  9 19:41:13 2021...
+INFO: [Common 17-206] Exiting Vivado at Sun Jan 10 14:13:40 2021...
