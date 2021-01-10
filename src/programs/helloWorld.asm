@@ -29,31 +29,31 @@
 	stw xr #FF ; store to port A  
 
 ; write Hello,world to lcd
-	ldw xr charH ; write 'h' 
+	ldw xr charH ; 
 	stw xr #FE ; store to port B
 	jmp writeChar
 
-	ldw xr chari ; write 'h' 
+	ldw xr chari ;
 	stw xr #FE ; store to port B
 	jmp writeChar
 
-	ldw xr char, ; write 'h' 
+	ldw xr char, ;
 	stw xr #FE ; store to port B
 	jmp writeChar
 
-	ldw xr charW ; write 'h' 
+	ldw xr charW ;
 	stw xr #FE ; store to port B
 	jmp writeChar
 
-	ldw xr charo ; write 'h' 
+	ldw xr charo ;
 	stw xr #FE ; store to port B
 	jmp writeChar
 
-	ldw xr charr ; write 'h' 
+	ldw xr charr ;
 	stw xr #FE ; store to port B
 	jmp writeChar
 
-	ldw xr charl ; write 'h' 
+	ldw xr charl ;
 	stw xr #FE ; store to port B
 	jmp writeChar
 
