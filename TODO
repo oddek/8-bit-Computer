@@ -1,7 +1,7 @@
-Insert more instructions
+Clean up control unit, create modules
+Implement division in ALU
+Implement binary literals in assembler
+Implement address offset in ldw and stw
+Implement possibility for variables in assembler
+Clean up assembler
 
-Clean up control unit!!!
-
-
-Start creating assembler
-Has to be planned very carefully!!!

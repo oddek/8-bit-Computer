@@ -28,6 +28,8 @@ For the CPU design, I have drawn inspiration from the MOS 6502 (because Ben Eate
  
 The assembler is just a tool for being to able write instructions for the computer, without going mad, so efficiency or elegance has not been emphasized at all. 
 
+As I ran out of time, some of the features that was planned and cleanups that was needed, was unfortunately abandoned for the time being.
+
 ## Example Programs
 
 
@@ -299,5 +301,4 @@ Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information
 Kent Odde - kentodde89@gmail.com
 
 Project Link: [https://github.com/oddek/8-bit-Computer](https://github.com/oddek/8-bit-Computer)
-
 
