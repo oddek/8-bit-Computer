@@ -2,10 +2,10 @@
 src/computer/Computer8Bit.srcs/sources_1/new/
 # 8 Bit Computer 
 
-![image alt >](img/hiWorld.jpeg =250)
-img[alt$=">"] {
-  float: right;
-}
+ 
+ <img align="right" src="img/hiWorld.jpeg" alt="Hello World Image" width="400">
+
+
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
@@ -75,6 +75,9 @@ The CPU consists of the following modules:
 	* Program Counter
 	* Stack Pointer
 	* Index Register 
+
+Its structure can be seen in the figure below:
+![CPU structure](img/cpuSchematic.png)
 
 
 ##### Registers
@@ -266,9 +269,10 @@ From this, the assembler will generate the following machine code (with a newlin
 
 ## Example Programs
 	
-* [Hi, World](examples/hiWorld.asm)
-* [Simple Add](examples/add.asm)
-* [Noe annet]
+* [Hi, World](src/programs/hiWorld.asm)
+* [Simple Add](src/programs/add.asm)
+* [Simple Multiplication](src/programs/mul.asm)
+* [Fibonacci](src/programs/fib.asm)
 
 <!-- USAGE -->
 ## Usage
