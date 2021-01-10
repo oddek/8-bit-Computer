@@ -8,9 +8,11 @@
 ## Table of Contents
 
 * [About the Project](#about-the-project)
-	* [Computer](#computer)
-		* [CPU](#cpu)
-	* [Assembler](#assembler)
+* [Example Programs](#example-programs)
+* [Source Code](#source-code)
+* [Computer](#computer)
+	* [CPU](#cpu)
+* [Assembler](#assembler)
 * [Usage](#usage)
 * [In Action](#in-action)
 * [License](#license)
@@ -33,14 +35,35 @@ As I ran out of time, some of the features that was planned and cleanups that wa
 
 ## Example Programs
 
-
+<img align="right" src="img/fib.jpg" alt="Fib" width="400">
 
 * [Hi, World](src/programs/helloWorld.asm)
 * [Simple Add](src/programs/add.asm)
 * [Simple Multiplication](src/programs/mul.asm)
 * [Fibonacci](src/programs/printFib.asm)
 
-<img src="img/fib.jpg" alt="Fib" width="400">
+
+
+## Source Code
+
+* [Computer_tb.vhd](src/computer/Computer8Bit.srcs/sim_1/new/Computer_tb.vhd)
+* [Computer.vhd](src/computer/Computer8Bit.srcs/sources_1/new/Computer.vhd)
+	* [CPU.vhd](src/computer/Computer8Bit.srcs/sources_1/new/CPU.vhd)
+		* [ALU.vhd](src/computer/Computer8Bit.srcs/sources_1/new/ALU.vhd)
+		* [ControlUnit.vhd](src/computer/Computer8Bit.srcs/sources_1/new/ControlUnit.vhd)
+		* [IndexRegister.vhd](src/computer/Computer8Bit.srcs/sources_1/new/IndexRegister.vhd)
+		* [ProgramCounter.vhd](src/computer/Computer8Bit.srcs/sources_1/new/ProgramCounter.vhd)
+		* [RegisterBank.vhd](src/computer/Computer8Bit.srcs/sources_1/new/RegisterBank.vhd)
+			* [PIPORegister.vhd](src/computer/Computer8Bit.srcs/sources_1/new/PIPORegister.vhd)
+		* [StackPointer.vhd](src/computer/Computer8Bit.srcs/sources_1/new/StackPointer.vhd)
+	* [IO.vhd](src/computer/Computer8Bit.srcs/sources_1/new/IO.vhd)
+	* [ModMCounter.vhd](src/computer/Computer8Bit.srcs/sources_1/new/ModMCounter.vhd)
+	* [RAM.vhd](src/computer/Computer8Bit.srcs/sources_1/new/RAM.vhd)
+	* [ROM.vhd](src/computer/Computer8Bit.srcs/sources_1/new/ROM.vhd)
+	* [SixteenBitDisplay.vhd](src/computer/Computer8Bit.srcs/sources_1/new/SixteenBitDisplay.vhd)
+		* [SixteenToFourMux.vhd](src/computer/Computer8Bit.srcs/sources_1/new/SixteenToFourMux.vhd)
+		* [HexToSseg.vhd](src/computer/Computer8Bit.srcs/sources_1/new/HexToSseg.vhd)
+* [Assembler](src/assembler/main.cpp)
 
 ## Computer
 
