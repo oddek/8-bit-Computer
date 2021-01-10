@@ -12,6 +12,7 @@
 		* [CPU](#cpu)
 	* [Assembler](#assembler)
 * [Usage](#usage)
+* [In Action](#in-action)
 * [License](#license)
 * [Contact](#contact)
 
