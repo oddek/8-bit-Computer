@@ -1,10 +1,8 @@
 <!-- https://thisdavej.com/copy-table-in-excel-and-paste-as-a-markdown-table/ -->
-src/computer/Computer8Bit.srcs/sources_1/new/
+
 # 8 Bit Computer 
 
- 
  <img align="right" src="img/hiWorld.jpeg" alt="Hello World Image" width="400">
-
 
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
@@ -30,6 +28,16 @@ For the CPU design, I have drawn inspiration from the MOS 6502 (because Ben Eate
  
 The assembler is just a tool for being to able write instructions for the computer, without going mad, so efficiancy or elegancy has not been emphasized at all. 
 
+## Example Programs
+
+
+
+* [Hi, World](src/programs/helloWorld.asm)
+* [Simple Add](src/programs/add.asm)
+* [Simple Multiplication](src/programs/mul.asm)
+* [Fibonacci](src/programs/printFib.asm)
+
+<img src="img/fib.jpg" alt="Fib" width="400">
 
 ## Computer
 [Source Code](src/computer/Computer8Bit.srcs/sources_1/new/Computer.vhd)
@@ -242,6 +250,7 @@ char:
 To assemble this, we run the command:
 ```
 ./assembler "prog.asm" "128"
+```
 
 From this, the assembler will generate the following machine code (with a newline after each byte).
 ```bin
@@ -267,17 +276,18 @@ From this, the assembler will generate the following machine code (with a newlin
 00000000 00000000
 ```
 
-## Example Programs
-	
-* [Hi, World](src/programs/hiWorld.asm)
-* [Simple Add](src/programs/add.asm)
-* [Simple Multiplication](src/programs/mul.asm)
-* [Fibonacci](src/programs/fib.asm)
+
 
 <!-- USAGE -->
 ## Usage
 
 The computer has been tested on a [Basys 3 Artix-7 FPGA](https://store.digilentinc.com/basys-3-artix-7-fpga-trainer-board-recommended-for-introductory-users/), and synthesized in [Xilinx Vivado 2020.2](https://www.xilinx.com/).
+
+## In Action
+<p>
+<img  src="img/hiWorld.gif" width="300" />
+<img  src="img/fib.gif" width="300" />
+</p>
 
 <!-- LICENSE -->
 ## License
