@@ -37,16 +37,14 @@ entity ALU is
 end ALU;
 
 architecture Behavioral of ALU is
-    signal temp : STD_LOGIC_VECTOR(data_width-1 downto 0);
-    signal tempUpper : STD_LOGIC_VECTOR(data_width-1 downto 0);
 
+    signal temp : STD_LOGIC_VECTOR(data_width-1 downto 0);
+    signal mul_temp : STD_LOGIC_VECTOR((data_width * 2) - 1 downto 0) := (others => '0');
 
     signal x_signed : signed(x'Range);
     signal y_signed : signed(y'Range);
     signal x_unsigned : unsigned(x'Range);
     signal y_unsigned : unsigned(y'Range);
-
-    signal mul_temp : STD_LOGIC_VECTOR((data_width * 2) - 1 downto 0) := (others => '0');
 
     constant alu_nop : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#00#, 5));
     constant alu_add : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#01#, 5));
@@ -164,11 +162,7 @@ begin
             -- MULU (Multiply, return upper bits)
             when "10011" =>
                 mul_temp <= std_logic_vector(x_signed * y_signed);
-                -- if(mul_temp(15 downto 8) = "00000000") then
-                    -- temp <= (others => '0');
-                -- else
-                    temp <= mul_temp(15 downto 8);
-                -- end if;
+                temp <= mul_temp(15 downto 8);
             -- DIVQ, (Divide, return Quotient)
             when "10100" =>
                 --TO BE IMPLEMENTED

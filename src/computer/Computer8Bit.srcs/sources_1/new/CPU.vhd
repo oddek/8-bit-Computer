@@ -1,23 +1,3 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 12/18/2020 11:06:12 AM
--- Design Name: 
--- Module Name: CPU - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -219,7 +199,7 @@ begin
         aluBusY => reg2AluY, dataBus => dataBus
     );
 
-                                      --Instantiation ALU
+    --Instantiation ALU
     aluInst : ALU 
     port map
     (

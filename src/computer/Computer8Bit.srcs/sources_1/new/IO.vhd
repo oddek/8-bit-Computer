@@ -1,35 +1,6 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 01/09/2021 02:49:20 PM
--- Design Name: 
--- Module Name: IO - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity IO is
     Port ( clk : in STD_LOGIC;
@@ -42,6 +13,7 @@ entity IO is
            Z_b  : out STD_LOGIC_VECTOR(7 downto 0));
 end IO;
 
+--Two registers for IO
 architecture Behavioral of IO is
 
     signal reg_a : STD_LOGIC_VECTOR(7 downto 0) := (others => '0');
@@ -50,7 +22,6 @@ begin
 
     process(clk, rst, en_load, load_a, load_b, dataBus)
     begin
-        -- dataBus <= (others => 'Z');
         if(rst = '1') then
             reg_a <= (others => '0');
             reg_b <= (others => '0');
@@ -64,6 +35,7 @@ begin
             end if;
         end if;
     end process;
+
     Z_a <= reg_a;
     Z_b <= reg_b;
 

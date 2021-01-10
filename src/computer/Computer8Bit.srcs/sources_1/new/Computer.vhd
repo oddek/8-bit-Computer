@@ -1,38 +1,6 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 12/20/2020 09:28:05 PM
--- Design Name: 
--- Module Name: Computer - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-
-
-
-
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity Computer is
     Port ( clk : in STD_LOGIC;
@@ -56,11 +24,14 @@ architecture Behavioral of Computer is
     signal romEnable : STD_LOGIC;
     signal ramEnable : STD_LOGIC;
 
+    --Stuf for IO/LCD screen
     signal load_io_a, load_io_b : STD_LOGIC;
     signal lcd_a, lcd_b : STD_LOGIC_VECTOR(7 downto 0);
 
+    --Seven segments display on Basys3
     signal hexDisp : STD_LOGIC_VECTOR(15 downto 0);
 
+    --Slower clock for all of the components
     signal global_clk : STD_LOGIC; 
 
     Component CPU 
@@ -90,6 +61,7 @@ architecture Behavioral of Computer is
                dataBus :  inout STD_LOGIC_VECTOR (DataSize-1 downto 0));
     end Component;
 
+    --Sevensegments display on basys3
     Component SixteenBitDisplay
         Port ( sw : in STD_LOGIC_VECTOR (15 downto 0);
                clk : in STD_LOGIC;
@@ -98,6 +70,7 @@ architecture Behavioral of Computer is
                an : out STD_LOGIC_VECTOR(3 downto 0));
     end Component;
 
+    --Counter for slowing down clock, set to a million down below
     Component ModMCounter 
         Generic(N : integer := 7;
                 M : Integer := 100);
@@ -108,21 +81,17 @@ architecture Behavioral of Computer is
 
     end Component;
 
-
+    --IO registers
     Component IO 
         Port ( clk : in STD_LOGIC;
                rst : in STD_LOGIC;
-                          en_load : in STD_LOGIC; 
-
+              en_load : in STD_LOGIC; 
                load_a : in STD_LOGIC;
                load_b : in STD_LOGIC;
                dataBus : in STD_LOGIC_VECTOR(7 downto 0);
                Z_a  : out STD_LOGIC_VECTOR(7 downto 0);
                Z_b  : out STD_LOGIC_VECTOR(7 downto 0));
     end Component;
-
-
-
 
 begin
 
@@ -205,13 +174,11 @@ begin
         clk => clk,
         rst => rst,
         q => open,
-        max_tick => global_clk --set as open for simulation
+        max_tick => global_clk --set as open for simulation, as we don't want a slow clock in that case
     );
     --Uncomment for simulation
     --global_clk <= clk;
     
-    
-
     io_reg : IO
     port map
     (

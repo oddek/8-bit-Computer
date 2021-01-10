@@ -1,23 +1,3 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 12/18/2020 04:37:51 PM
--- Design Name: 
--- Module Name: ControlUnit - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -48,9 +28,11 @@ end ControlUnit;
 
 architecture Behavioral of ControlUnit is
 
+    --A lot of these states arent necessary anymore, and the ones that are necessary should be renamed
     type state_type is (halt, init, read_pc, instr_fetch, instr_decode, exe, mem, write_reg);
     signal state_reg, state_next : state_type := instr_fetch;
 
+    --Addressess for activating approriate register from registerbank
     constant REG_NOOP_ADDR : STD_LOGIC_VECTOR(2 downto 0) := STD_LOGIC_VECTOR(to_unsigned(0, 3));
     constant REG_INSTR1_ADDR : STD_LOGIC_VECTOR(2 downto 0) := STD_LOGIC_VECTOR(to_unsigned(1, 3));
     constant REG_INSTR2_ADDR : STD_LOGIC_VECTOR(2 downto 0) := STD_LOGIC_VECTOR(to_unsigned(2, 3));
@@ -60,6 +42,7 @@ architecture Behavioral of ControlUnit is
     constant REG_HI_ADDR : STD_LOGIC_VECTOR(2 downto 0) := STD_LOGIC_VECTOR(to_unsigned(6, 3));
     constant REG_LO_ADDR : STD_LOGIC_VECTOR(2 downto 0) := STD_LOGIC_VECTOR(to_unsigned(7, 3));
 
+    --Instructions
     constant nop : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#00#, 5));
     constant ldw : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#01#, 5));
     constant ldi : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#02#, 5));
@@ -88,11 +71,8 @@ architecture Behavioral of ControlUnit is
     constant div : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#19#, 5));
     constant inl : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#1A#, 5));
     constant ini : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#1B#, 5));
-    -- These arent necessary as they are just normal registers, and can be accessed with all other operations. 
-    -- constant mfhi : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#1A#, 5));
-    -- constant mflo : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#1A#, 5));
 
-
+    --Alu opcodes
     constant alu_nop : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#00#, 5));
     constant alu_add : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#01#, 5));
     constant alu_addu : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#02#, 5));
@@ -116,12 +96,12 @@ architecture Behavioral of ControlUnit is
     constant alu_divq : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#14#, 5));
     constant alu_divr : STD_LOGIC_VECTOR(4 downto 0) := std_logic_vector(to_unsigned(16#15#, 5));
 
-
+    --State machine for knowing which arguments of the instruction were reading at the moment
     type instr_arg is(first_arg, second_arg);
     signal instr_curr, instr_next : instr_arg := first_arg;
 
+    --Necessary for separating the execution of the instruction into separate clock cycles
     signal instruction_stage, instruction_stage_next : integer := 0;
-
 
 begin
 
@@ -169,10 +149,9 @@ begin
                 --Do nothing forever
                 state_next <= init;
             when init =>
-                -- pc_out <= '1';
                 state_next <= read_pc;
-            --Program counter out, memory register in:
 
+            --Program counter out, memory register in:
             when read_pc =>
                 reg_load <= REG_MEM_ADDR; 
                 pc_out <= '1';
@@ -198,6 +177,7 @@ begin
 
 
                 end case;
+            --This part should really be renamed, at it decodes and executes instructions
             when instr_decode =>
                 --Enable instruction decode component
                 case instr(7 downto 3) is
@@ -594,6 +574,7 @@ begin
 
                     when others =>
                 end case;
+            --These two states arent necessary i think
             when exe =>
             --Enable alu with suitable opcode
 

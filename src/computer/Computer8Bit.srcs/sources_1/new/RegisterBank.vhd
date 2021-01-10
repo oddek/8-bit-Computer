@@ -1,35 +1,8 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 12/18/2020 11:14:44 AM
--- Design Name: 
--- Module Name: RegisterBank - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
 use IEEE.NUMERIC_STD.ALL;
 
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity RegisterBank is
     Generic( addr_width : integer := 3;
@@ -111,6 +84,8 @@ begin
      generic map(data_width => 8)
      port map(clk => clk, rst => rst, en => en_lo, load => load_lo, q => open, dataBus => dataBus);
 
+
+     --Logic for enabling either loading or output from the correct register
      en_instr1 <= '1' when reg_out = REG_INSTR1_ADDR else
                   '0';
      load_instr1 <= '1' when reg_load = REG_INSTR1_ADDR else
