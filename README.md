@@ -20,13 +20,13 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project consists of an 8 bit computer simulated in VHDL, as well as an assembler written in C++. My goal was to get an incresed understanding of computer architecture and VHDL during the christmas vacation of 2020. 
+This project consists of an 8 bit computer simulated in VHDL, as well as an assembler written in C++. My goal was to get an increased understanding of computer architecture and VHDL during the Christmas vacation of 2020. 
 
-The main inspiration for this project came from [Ben Eater](https://eater.net/), who on his youtube channel has done detailed implementations of an 8-bit computer and a 6502 computer, on breadboards. My computer ended up being quite different, as it is of course a lot easier to implement a large project in VHDL than on breadboards. However, his excellent explanations gave me the understanding necessary to even attempt a project like this. 
+The main inspiration for this project came from [Ben Eater](https://eater.net/), who on his YouTube channel has done detailed implementations of an 8-bit computer and a 6502 computer, on breadboards. My computer ended up being quite different, as it is of course a lot easier to implement a large project in VHDL than on breadboards. However, his excellent explanations gave me the understanding necessary to even attempt a project like this. 
 
 For the CPU design, I have drawn inspiration from the MOS 6502 (because Ben Eater gave a great tutorial on it), and the MIPS architecture, as it is what we learned about in school. However, a lot of stuff was done of the top of my head, and will probably not resemble any sort of best practice.
  
-The assembler is just a tool for being to able write instructions for the computer, without going mad, so efficiancy or elegancy has not been emphasized at all. 
+The assembler is just a tool for being to able write instructions for the computer, without going mad, so efficiency or elegance has not been emphasized at all. 
 
 ## Example Programs
 
@@ -40,7 +40,6 @@ The assembler is just a tool for being to able write instructions for the comput
 <img src="img/fib.jpg" alt="Fib" width="400">
 
 ## Computer
-[Source Code](src/computer/Computer8Bit.srcs/sources_1/new/Computer.vhd)
 
 The computer consists of the following modules:
 
@@ -49,14 +48,14 @@ The computer consists of the following modules:
 * RAM
 * IO
 
-and the top level structure can be seen in the figure below:
+Where the top level structure can be seen in the figure below:
 ![Top level schematic](img/topLevelSchematic.png)
 
-For now, the IO only handles output, and is pretty much hardcoded to work with an HD44780 LCD display. The seven segment display is embedded on the Basys3, and shows the current contents on the address and data bus. 
+For now, the IO only handles output, and is pretty much hard-coded to work with an HD44780 LCD display. The seven segment display is embedded on the Basys3, and shows the current contents on the address and data bus. 
 
 The modMillionCounter is there to provide a reduced clock speed, as the Basys3 clock runs at 100MHz
 
-When generating the bitstream, the ROM will be filled with the currently selected program, and the program counter wil start reading at address 0.
+When generating the bitstream, the ROM will be filled with the currently selected program, and the program counter will start reading at address 0.
 
 For simplicity, the data bus and address bus are 8 bits wide. RAM, ROM and IO are all accessed via the same buses, and the address scheme can be seen in the table below:
 
@@ -145,11 +144,11 @@ The ALU will perform an operation on either the X register, the Y register or bo
 | 20       | 10100    | DIVQ             |
 | 21       | 10101    | DIVR             |
 ```
-Most of the operations are self-explanatory, however 18 through 21 stands out. MULL will multiply the the two 8-bit inputs, and return the lower 8 bits of this calculation. MULU on the other hand, will return the upper 8 bits of this multiplication. 
+Most of the operations are self-explanatory, however 18 through 21 stands out. MULL will multiply the two 8-bit inputs, and return the lower 8 bits of this calculation. MULU on the other hand, will return the upper 8 bits of this multiplication. 
 
 DIVQ returns the quotient of the division, while DIVR returns the remainder of the division. 
 
-Instructions 14 - 20 are bitshift instructions. 
+Instructions 14 - 20 are bit shift instructions. 
 
 ##### Instruction Set Architecture/Control Unit
 
@@ -249,7 +248,7 @@ char:
 
 To assemble this, we run the command:
 ```
-./assembler "prog.asm" "128"
+./assembler prog.asm 128
 ```
 
 From this, the assembler will generate the following machine code (with a newline after each byte).
