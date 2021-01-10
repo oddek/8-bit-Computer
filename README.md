@@ -2,9 +2,10 @@
 src/computer/Computer8Bit.srcs/sources_1/new/
 # 8 Bit Computer 
 
-![](img/hiWorld.gif)
-![](img/hiWorld.jpeg =250)
-
+![image alt >](img/hiWorld.jpeg =250)
+img[alt$=">"] {
+  float: right;
+}
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
